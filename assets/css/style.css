@@ -1,0 +1,61 @@
+#alerts {background: #fff; width:93%; height:94%; padding: 20px; position: relative;}
+textarea.alertkeys {width:500px;}
+div.email {float: left;}
+div.often {margin-left: 10px; float: left;}
+select#cronjob { margin-top: 3px; padding: 4px 2px 5px;}
+.custom-alerts {
+position: absolute;
+top: 15px;
+right: 10px;
+}
+.select {width: 180px; padding: 2px 2px; border: 1px solid #ccc;}
+label.check {margin-right: 15px;}
+div.source {float:right; width: 180px; margin-right: 30px;}
+div.alert-source {float:left; width: 180px; margin-right: 30px;}
+div.language {float:right; width: 180px;}
+div.alert-language {float:left; width: 180px;}
+span.label {display: block; font-weight: bold; font-size: 11px; }
+a#register {margin-right: 20px!Important; margin-top: 2px!Important;}
+#addkeywords {background: #fff; width:93%; height:94%; padding: 20px;}
+textarea { border: 1px solid #ccc; width: 300px; padding: 6px 5px; font-style: italic; color: #969696; font-family: arial; font-size: 12px; margin: 3px 0;}
+div.cont-padd {padding: 10px 0; float: left;}
+input.input {width: 300px; border: 1px solid #ccc; padding: 6px 5px; font-style: italic; color: #969696; font-family: arial; font-size: 12px; margin: 3px 0;}
+div.datainsert { margin-bottom: 10px; font-size: 11px;}
+.clear {clear: both;}
+
+
+/* tables */
+table.tablesorter {
+    width: 100%;
+    text-align: left;
+}
+table.tablesorter thead tr th, table.tablesorter tfoot tr th {
+    padding: 4px;
+}
+table.tablesorter thead tr .header {
+    background-image: url(bg.gif);
+    background-repeat: no-repeat;
+    background-position: center right;
+    cursor: pointer;
+}
+table.tablesorter tbody td {
+    color: #3D3D3D;
+    padding: 4px;
+    background-color: #FFF;
+    vertical-align: top;
+}
+table.tablesorter tbody tr.odd td {
+    background-color:#F0F0F6;
+}
+table.tablesorter thead tr .headerSortUp {
+    background-image: url(asc.gif);
+}
+table.tablesorter thead tr .headerSortDown {
+    background-image: url(desc.gif);
+}
+table.tablesorter thead tr .headerSortDown, table.tablesorter thead tr .headerSortUp {
+    background-color: #FFF;
+}
+table .header {
+    cursor: pointer;
+}
