@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Cuecow Invoice</title>
+</head>
+<body style="font-family:Verdana, Geneva, sans-serif; font-size:14px; line-height:20px;">
+
+<div style="float:left; width:100%; padding:20px; border:#FFF 2px solid;">
+	<table style="width:95%;" border="0">
+  	<tr>
+    	<td align="right">
+        	Cuecow ApS<br />
+			CVR: 33 57 24 84<br />
+			Østbanegade 17. 1. th. <br />
+			2100 Copenhagen Ø <br />
+			Denmark
+        </td>
+  	</tr>
+    <tr>
+    	<td>[ADDRESS]</td>
+    </tr>
+    <tr><td>&nbsp;</td></tr>
+    <tr>
+    	<td style="border-bottom:#333 1px solid;">INVOICE</td>
+    </tr>
+    <tr><td>&nbsp;</td></tr>
+    <tr>
+    	<td style="width:100%;">
+        	<table border="0" style="width:100%;" cellpadding="0" cellspacing="0">
+            <tr>
+            	<td style="width:17%;">InvoiceID: </td>
+                <td style="width:83%;">[INVOICE_ID]</td>
+            </tr>
+            <tr>
+            	<td>Invoice Date: </td>
+                <td>[PAYMENT_DATE]</td>
+            </tr>
+            </table>
+        </td>
+    </tr>
+    <tr><td style="border-bottom:#333 1px solid;">&nbsp;</td></tr>
+    <tr>
+    	<td style="width:100%;">
+        	<table border="0" style="width:100%;" cellpadding="0" cellspacing="0">
+            <tr>
+            	<td style="border-bottom:#333 1px solid; padding:5px 0px 5px 0px; width:79%;">
+                	Kreditnota of invoice [INV]
+                </td>
+                <td align="right" style="border-bottom:#333 1px solid; padding:5px 0px 5px 0px; width:21%;">[TOTAL_AMOUNT]</td>
+            </tr>
+            <tr>
+            	<td align="right" style="border-bottom:#333 1px solid; padding:5px 0px 5px 0px;">Subtotal:</td>
+                <td align="right" style="border-bottom:#333 1px solid; padding:5px 0px 5px 0px;">[TOTAL_AMOUNT]</td>
+            </tr>
+            <tr>
+            	<td align="right" style="border-bottom:#333 1px solid; padding:5px 0px 5px 0px;">VAT(25%):</td>
+                <td align="right" style="border-bottom:#333 1px solid; padding:5px 0px 5px 0px;">[TAX]</td>
+            </tr>
+            <tr>
+            	<td align="right" style="border-bottom:#333 1px solid; padding:5px 0px 5px 0px;"><b>TOTAL:</b></td>
+                <td align="right" style="border-bottom:#333 1px solid; padding:5px 0px 5px 0px;"><b>[GRAND_TOTAL]</b></td>
+            </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+    	<td style="padding-top:40px;">The invoice has been paid.</td>
+    </tr>
+	</table>
+</div>
+</body>
+</html>
