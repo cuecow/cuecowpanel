@@ -115,7 +115,6 @@ class Campaign extends CActiveRecord
 		
 		$sql="SELECT * FROM campaign where campaign_id= ".$campaign_id;
 		$result=$connection->createCommand($sql)->queryAll();
-		
 		return $result;
 	}
 	
@@ -299,7 +298,7 @@ class Campaign extends CActiveRecord
 				else
 					$new_end_date = $value['end_date'];		
 					
-				if($new_start_date<strtotime(now) && $new_end_date<strtotime(now))
+				if($new_start_date < strtotime($today_date) && $new_end_date<strtotime($today_date))
 					$camp_ids .= $value['campaign_id'].',';
 			}
 
@@ -308,7 +307,7 @@ class Campaign extends CActiveRecord
 		if(!empty($camp_ids))		
 			$sql = "SELECT * FROM campaign where userid= ".Yii::app()->user->user_id." and status='active' and campaign_id IN(".substr($camp_ids,0,-1).")";
 		else
-			$sql="SELECT * FROM campaign where userid= ".Yii::app()->user->user_id." and status='active' and start_date<'".strtotime(now)."' and end_date<'".strtotime(now)."' ";	
+			$sql="SELECT * FROM campaign where userid= ".Yii::app()->user->user_id." and status='active' and start_date<'".strtotime($today_date)."' and end_date<'".strtotime($today_date)."' ";	
 		
 
 		$result = $connection->createCommand($sql)->queryAll();
@@ -322,7 +321,6 @@ class Campaign extends CActiveRecord
 		
 		$sql="SELECT * FROM campaign_fbpost where campaign_id= ".$camp_id;
 		$result=$connection->createCommand($sql)->queryAll();
-		
 		return $result;
 	}
 	
