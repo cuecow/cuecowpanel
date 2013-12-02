@@ -359,7 +359,8 @@ class Campaign extends CActiveRecord
 	{
 		$connection=Yii::app()->db;
 		
-		$sql = 'UPDATE campaign SET name="'.$campaign_name.'",group_ids="'.$groups.'",page_id="'.$pages.'",start_date="'.$start_date.'",start_time="'.$start_time.'",end_date="'.$end_date.'",end_time="'.$end_time.'",timezone="'.$timezone.'",kpi="'.$kpi.'",facebook_deals="'.$facebook_deals.'",foursquare_specials="'.$fs_specials.'",google_place="'.$google_places.'",fb_posts="'.$fb_posts.'",twitter="'.$twitter.'",fb_ads="'.$FB_ads.'",google_adwords="'.$google_adwords.'",dated="'.$dated.'",status="'.$status.'" where campaign_id="'.$lastid.'" and userid="'.$userid.'"';
+		$sql = 'UPDATE campaign SET name="'.$campaign_name.'",group_ids="'.$groups.'",page_id="'.$pages.'",start_date="'.$start_date.'",start_time="'.$start_time.'",end_date="'.$end_date.'",end_time="'.$end_time.'",timezone="'.$timezone.'",kpi="'.$kpi.'",facebook_deals="'.$facebook_deals.'",foursquare_specials="'.$fs_specials.'",google_place="'.$google_places.'",fb_posts="'.$fb_posts.'",twitter="'.$twitter.'",fb_ads="'.$FB_ads.'",google_adwords="'.$google_adwords.'",dated="'.$dated.'",status="'.$status.'"
+                    where campaign_id="'.$lastid.'" and userid="'.$userid.'"';
 			
 		$result=$connection->createCommand($sql);
 		$final_result=$result->execute();
@@ -410,6 +411,35 @@ class Campaign extends CActiveRecord
 		
 		//$sql = 'UPDATE campaign_fbpost SET post_title="'.$post_title.'", selected_wall_option="'.$sel_wall.'", selected_wall="'.$selected_wall.'", content_type="'.$content_type.'",photo="'.$name_photo.'",video="'.$name_video.'",url_link="'.$url.'",message="'.$msg.'",title="'.$link_title.'",description="'.$link_description.'",email_notify="'.$email_notify.'" where campaign_id="'.$lastid.'"';
 		$sql = 'INSERT INTO campaign_fbpost SET post_title="'.$post_title.'", selected_wall_option="'.$sel_wall.'", selected_wall="'.$selected_wall.'", content_type="'.$content_type.'",photo="'.$name_photo.'",video="'.$name_video.'",url_link="'.$url.'",message="'.$msg.'",title="'.$link_title.'",description="'.$link_description.'",email_notify="'.$email_notify.'", campaign_id="'.$lastid.'"';
+	
+			
+		$result=$connection->createCommand($sql);
+		$final_result=$result->execute();
+		
+		return $final_result;
+	}
+        
+        public function UpdateFBCamp($post_title,$sel_wall,$selected_wall,$url,$msg,$link_title,$link_description,$email_notify,$content_type,$name_photo,$name_video,$lastid)
+        {
+            $connection=Yii::app()->db;
+		
+		$sql = 'UPDATE campaign_fbpost SET post_title="'.$post_title.'", selected_wall_option="'.$sel_wall.'", selected_wall="'.$selected_wall.'", content_type="'.$content_type.'",photo="'.$name_photo.'",video="'.$name_video.'",url_link="'.$url.'",message="'.$msg.'",title="'.$link_title.'",description="'.$link_description.'",email_notify="'.$email_notify.'" where campaign_id="'.$lastid.'"';
+		//$sql = 'UPDATE campaign_fbpost SET post_title="'.$post_title.'", selected_wall_option="'.$sel_wall.'", selected_wall="'.$selected_wall.'", content_type="'.$content_type.'",photo="'.$name_photo.'",video="'.$name_video.'",url_link="'.$url.'",message="'.$msg.'",title="'.$link_title.'",description="'.$link_description.'",email_notify="'.$email_notify.'" WHERE campaign_id="'.$lastid.'"';
+	
+			
+		$result=$connection->createCommand($sql);
+		$final_result=$result->execute();
+		
+		return $final_result;
+        }
+        
+        public function UpdateFSCamp($venue_type,$location_type,$sp_type,$count1,$count2,$count3,$unlockedText,$offer,$finePrint,$cost,$lastid)
+	{
+		$connection=Yii::app()->db;
+		
+		$sql = 'UPDATE fs_special SET location_type="'.$venue_type.'",location="'.$location_type.'",sp_type="'.$sp_type.'",count1="'.$count1.'",count2="'.$count2.'",count3="'.$count3.'",unlockedText="'.$unlockedText.'",offer="'.$offer.'",finePrint="'.$finePrint.'",cost="'.$cost.'",status="pending",dated="'.strtotime(now).'" where campaign_id="'.$lastid.'"';
+		
+		//$sql = 'INSERT INTO fs_special SET location_type = "'.$venue_type.'",location = "'.$location_type.'",sp_type = "'.$sp_type.'",count1 = "'.$count1.'",count2 = "'.$count2.'",count3 = "'.$count3.'",unlockedText = "'.$unlockedText.'",offer = "'.$offer.'",finePrint = "'.$finePrint.'",cost = "'.$cost.'",status = "pending",dated = "'.strtotime(now).'", campaign_id = "'.$lastid.'"';
 	
 			
 		$result=$connection->createCommand($sql);

@@ -2079,6 +2079,7 @@ class UserController extends Controller
 		
 		if(!empty($_POST['campaign_name']))
 		{
+                    
 			$campaign_name 	 = $_POST['campaign_name'];
 			
 			$temp_start_time = explode(':',$_POST['start_time']);
@@ -2099,6 +2100,7 @@ class UserController extends Controller
 			else
 				$end_date = mktime(0,0,0,$temp_end_date[0],$temp_end_date[1],$temp_end_date[2]);
 			
+                        $today_date = date('m/d/Y');
 			$groups				= $_POST['groups'];
 			$pages				= $_POST['page'];
 			$start_date			= $start_date;
@@ -2116,11 +2118,147 @@ class UserController extends Controller
 			$google_adwords 	= ($_POST['google_adwords']=='yes') ? 'yes' : 'no';
 			$userid 			= Yii::app()->user->user_id;
 			$status				= 'pending';
-			$dated				= strtotime(now);
-			//$lastid				= $_POST['savedid'];
+			$dated				= strtotime($today_date);
+			$lastid				= $_POST['savedid'];
+                        
+                        if($_POST['savedid'])
+                        {
+                            $SaveCamp = $model_campaign->SaveCamp($lastid,$userid,$campaign_name,$groups,$pages,$start_date,$start_time,$end_date,$end_time,$timezone,$kpi,$facebook_deals,$fs_specials,$google_places,$fbposts,$twitter,$FB_ads,$google_adwords,$dated,$status);
+                            if($_POST['fbposts']=='yes')
+				{
+					$post_title = $_POST['fb_post_title'];
+					$url = $_POST['link_get'];
+					$msg = $_POST['textmsg'];
+					$link_title = $_POST['link_title'];
+					$link_description = $_POST['link_description'];
+					$email_notify = $_POST['Fbposts']['email_notify'];
+					$sel_wall		= $_REQUEST['sel_wall'];
+					$selected_wall	= $_REQUEST['selected_wall'];
+					
+					if($_POST['post_to']=="nothing")
+						$content_type = "text";
+					else if($_POST['post_to']=="photos")
+						$content_type = "photo";
+					else if($_POST['post_to']=="videos")
+						$content_type = "video";
+						
+					if($content_type=='photo' && $_FILES['fb_photo']['name'])
+					{
+						$get_tenp_ext = explode('.',$_FILES['fb_photo']['name']);
+						$ext = $get_tenp_ext[count($get_tenp_ext)-1];
+						
+						$name_photo = strtotime(now).'.'.$ext;
+						move_uploaded_file($_FILES['fb_photo']['tmp_name'],'images/fbposts/'.$name_photo);
+					}
+					else if($content_type=='video' && $_FILES['videophoto']['name'])
+					{
+						$get_tenp_ext = explode('.',$_FILES['videophoto']['name']);
+						$ext = $get_tenp_ext[count($get_tenp_ext)-1];
+						
+						$name_video = strtotime(now).'.'.$ext;
+						move_uploaded_file($_FILES['videophoto']['tmp_name'],'images/fbposts/'.$name_video);
+					}
+					
+					$SaveFBCamp = $model_campaign->UpdateFBCamp($post_title,$sel_wall,$selected_wall,$url,$msg,$link_title,$link_description,$email_notify,$content_type,$name_photo,$name_video,$lastid);	
+				}
+                                
+                                if( $_POST['fs_specials'] == 'yes' )
+				{
+					$sp_type = $_POST['sp_type'];
+					
+					if($sp_type == 'swarm')
+					{
+						$count1 = $_POST['swarm_people'];
+						$count2 = $_POST['swarm_days'];
+						
+						$unlockedText = 'When '.$count1.' people are checked in at once with a maximum of '.$count2.' unlocks per day.';
+					}
+					else if($sp_type == 'friends')
+					{
+						$count1 = $_POST['friend_people'];
+						
+						$unlockedText = 'When '.$count1.' friends check in together.';
+					}
+					else if($sp_type == 'flash')
+					{
+						$count1 = $_POST['flash_people'];
+						
+						if($_POST['flash_time1'])
+							$temp_count1 = explode(':',$_POST['flash_time1']);
+						
+						$count2 = $temp_count1[0];
+						
+						if($_POST['flash_time2'])
+							$temp_count2 = explode(':',$_POST['flash_time2']);
+						
+						$count3 = $temp_count2[0];
+						
+						$unlockedText='When a customer is one of the first '.$count1.' people to check in between '.$_POST['flash_time1'].'  and '.$_POST['flash_time2'].' .';
+					}
+					else if($sp_type=='count')
+					{
+						$newbie_check=$_POST['newbie_check'];
+						
+						$count1 = 1;
+						
+						if($newbie_check=='any_venue')
+							$unlockedText ='When a user checks in for the first time at any venue.';
+						else
+							$unlockedText='When a user checks in for the first time at each venue.';
+					}
+					else if($sp_type=='frequency')
+					{
+						$count1 = 1;
+						
+						$unlockedText='When anyone checks in.';
+					}
+					else if($sp_type=='regular')
+					{
+						if($_POST['loyalty_check']==1)
+						{
+							$count1=$_POST['loyalty_opt1'];
+							$unlockedText='Every '.$count1.' check-ins';
+						}
+						else if($_POST['loyalty_check']==2)
+						{
+							$count1=$_POST['loyalty_opt2'];
+							$unlockedText='When a customer checks in exactly '.$count1.' times';
+						}
+						else if($_POST['loyalty_check']==3)
+						{
+							$count1=$_POST['loyalty_opt3'];
+							$count2=$_POST['loyalty_opt4'];
+							$unlockedText='When a customer has checked in '.$count1.' or more times in the last '.$count3.' days.';
+						}
+						
+						$unlockedText .=' Progress towards unlocking the special counts check-ins:';
+						
+						if($_POST['loyalty_check_venue']=='each_venue')
+							$unlockedText .=' At each venue separately';
+						else
+							$unlockedText .=' Across all venues together';
+					}
+					else if($sp_type=='mayor')
+					{
+						$unlockedText='When a customer is the mayor and checks in.';
+					}
+					
+					$offer = $_POST['offer'];
+					$finePrint = $_POST['rules'];
+					$cost = $_POST['cost'];
+					
+					$venue_type = $_POST['sel_venue'];
+					$location_type = $_POST['groups'];
+					
+					$SaveFSCamp = $model_campaign->UpdateFSCamp($venue_type,$location_type,$sp_type,$count1,$count2,$count3,$unlockedText,$offer,$finePrint,$cost,$lastid);
+				}
+                        }
 			 
 			//$SaveCamp = $model_campaign->SaveCamp($lastid,$userid,$campaign_name,$groups,$pages,$start_date,$start_time,$end_date,$end_time,$timezone,$kpi,$facebook_deals,$fs_specials,$google_places,$fbposts,$twitter,$FB_ads,$google_adwords,$dated,$status);
-			
+                        else
+                        {
+                            
+                        
 			$lastid = $model_campaign->InsertCamp($userid,$campaign_name,$groups,$pages,$start_date,$start_time,$end_date,$end_time,$timezone,$kpi,$facebook_deals,$fs_specials,$google_places,$fbposts,$twitter,$FB_ads,$google_adwords,$dated,$status);
 			
 			if( $lastid > 0 )
@@ -2264,12 +2402,14 @@ class UserController extends Controller
 					$SaveFBCamp = $model_campaign->SaveFBCamp($post_title,$sel_wall,$selected_wall,$url,$msg,$link_title,$link_description,$email_notify,$content_type,$name_photo,$name_video,$lastid);	
 				}
 			}
+                        }
 			
 			$this->redirect(array('campaign'));
 		}
 		
 		if($_POST['submit'] == 'GO campaign' && (empty($_POST['campaign_name']) || empty($_POST['start_date']) || empty($_POST['end_date']) || empty($_POST['start_time']) || empty($_POST['end_time'])))
 		{
+                    
 			$msg = 1;			
 		}
 		
