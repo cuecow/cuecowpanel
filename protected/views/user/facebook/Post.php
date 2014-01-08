@@ -147,8 +147,11 @@ if($frst_page)
                 <div class="quick_comment_cntnr" id="add_new_post1" align="center" style="display:none;">
                     <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/ajax-loader.gif" />
                 </div>
-                
-                <?php include('fb_comments.php'); ?>
+                <?php
+                $own = 1;
+                include('fb_comments.php');
+                $own = 0;
+                ?>
                 
                 </span>
                 
@@ -175,8 +178,11 @@ if($frst_page)
 				<div class="quick_comment_cntnr" id="add_new_post2" align="center" style="display:none;">
                 	<img src="<?php echo Yii::app()->request->baseUrl; ?>/images/ajax-loader.gif" />
                 </div>
-	                
-				<?php include('fb_comments_others.php'); ?>
+	        <?php
+                    $own = 0;
+                    include('fb_comments.php');
+                    $own = 1;
+                ?>
                 
                 </span>
                 

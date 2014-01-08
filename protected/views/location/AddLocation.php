@@ -76,7 +76,7 @@
              
 			 <?php echo $form->textField($model,'fburl',array('id'=>'fburl','class'=>'textbox','style'=>'width:500px;')); ?> 
              <a href="javascript:FindRelatedUrl($('#fburl').val(),'fb');" title="Find other venues with a similar or identical URL"><img src="<?php echo Yii::app()->request->baseUrl; ?>/images/icon-search.png" border="0" /></a>
-             
+             <p>(Hint: enter url of place instead of page url)</p>
         </div>
     </div>
     

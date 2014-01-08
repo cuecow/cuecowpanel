@@ -1,4 +1,4 @@
-<? $form=$this->beginWidget('CActiveForm', array('action'=>Yii::app()->request->baseUrl.'/index.php/user/usermanagement/view/Add','id'=>'location-form','htmlOptions'=>array('class'=>'styled'),'enableAjaxValidation'=>true,)); ?>
+<?php $form=$this->beginWidget('CActiveForm', array('action'=>Yii::app()->request->baseUrl.'/index.php/user/usermanagement/view/Add','id'=>'location-form','htmlOptions'=>array('class'=>'styled'),'enableAjaxValidation'=>true,)); ?>
 				
 <div class="container container-top">
 	<div class="row-fluid">    
@@ -13,9 +13,9 @@
                     		
                             <?php if(isset($_POST['User']) && $validate>0){ ?>
 
-                            <div class="alert alert-error">
+                           <div class="alert alert-error">
                                 <button type="button" class="close" data-dismiss="alert">&times;</button>
-                                <? echo $form->errorSummary($model); ?>
+                                <?  echo $form->errorSummary($model); ?>
                             </div>
                             
                             <?php } ?>

@@ -13,6 +13,7 @@ class UserController extends Controller
 	 */
 	public function filters()
 	{
+            
 		return array(
 			'accessControl', // perform access control for CRUD operations
 		);
@@ -1394,7 +1395,7 @@ class UserController extends Controller
 		{
 			$page_id = $_REQUEST['page_id'];
 		}
-	
+                //var_dump($page_id); die();
 		if($page_id)
 		{
 			$token_cntnr = AccessToken::model()->PageAuth($page_id);
@@ -1427,6 +1428,7 @@ class UserController extends Controller
 		
 		if(isset($_POST['Fbpages']))
 		{
+                    
 			$model->attributes = $_POST['Fbpages'];
 			
 			if($model->validate())

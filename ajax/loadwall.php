@@ -1,6 +1,8 @@
 <?php
 include('../connection.php');
 
+include('../framework/yii.php');
+
 if (empty($_REQUEST['pageid']) && empty($_REQUEST['userid']) && empty($_REQUEST['token'])) 
 {
 	$return['error'] = true;
@@ -126,7 +128,7 @@ else
 						}
 					$return['msg'] .= '</div>';
                     
-	if($values->comments->count>3) 
+	if(count($values->comments->data) > 3) 
 	{
     
     	$return['msg'] .= '<div class="facebook_comments" id="show_fullcomments_'.$values->id.'" align="center">
@@ -139,7 +141,7 @@ else
     
 	$lastest_comment = array(); 
 	
-	if($values->comments->count>0 && count($comments_feed)) 
+	if(count($values->comments->data) > 0 && count($comments_feed)) 
 	{
         $return['msg'] .= '<div id="comments_'.$values->id.'" style="display:none; float:left;">
         <table style="margin-bottom:5px;" class="table">
@@ -148,8 +150,11 @@ else
                 <div style="padding:5px; width:450px; margin-left:20px;">
                 <table style="margin-bottom:5px;">';
                 
-                if($values->comments->count>3)
-                    $start_fill = $values->comments->count - 3;
+                if(count($values->comments->data) > 3)
+                {
+                    $countt = count($values->comments->data);
+                    $start_fill = $countt - 3;
+                }
                 else
                     $start_fill = 1;
                 
@@ -293,26 +298,46 @@ else
 	}
 		
 		
-	$return['msg_other'] = '';
+	//$return['msg_other'] = '';
+        
+        $return['msg_other'] = '
 		
-	$return['msg_other'] = '<!-- Quick Comment -->
-						  <div class="quick_comment_box">
-							  <div class="quick_comment_cntnr quick_comment_title">Quick Post</div>
-							  <div class="quick_comment_cntnr">
-								  <img src="https://graph.facebook.com/'.$_REQUEST['pageid'].'/picture?type=square" width="35" height="32" />
-								  <input type="text" id="quickcomment2" value="Enter new Post ..." onfocus="if(this.value==\'Enter new Post ...\')this.value=\'\';" onblur="if(this.value==\'\') this.value=\'Enter new Post ...\';" class="quick_comment_txtbx" />
-								  
-								  <div class="quick_post_submit">
-									<input type="button" value="Submit" class="button small green float_right" onclick="QuickPost(2);" />
-								</div>
-								<div style="clear:both;"></div>
-								<div class="quick_comment_cntnr" id="add_new_post2" align="center" style="display:none;">
-									<img src="http://panel.cuecow.com/images/ajax-loader.gif" />
-								</div>
-							  </div>
-							  
-						  </div>
-						  <!-- Quick Comment -->';
+		<div class="well">
+                
+        	<fieldset>
+                
+            	<img src="https://graph.facebook.com/'.$_REQUEST['pageid'].'/picture?type=square" width="35" height="32" /> &nbsp; <input type="text" id="quickcomment2" placeholder="Enter new Post ..." style="width:85%;" />
+                    
+                <div class="clearfix"></div>
+                    
+                <input type="button" value="Submit" class="btn btn-info" style="float:right; margin-right:23px;" onclick="QuickPost(2);" />
+                    
+			</fieldset>
+                
+		</div>
+                
+        <div class="quick_comment_cntnr" id="add_new_post2" align="center" style="display:none;">
+        	<img src="'.Yii::app()->request->baseUrl.'/images/ajax-loader.gif" />
+        </div>';
+		
+//	$return['msg_other'] = '<!-- Quick Comment -->
+//						  <div class="quick_comment_box">
+//							  <div class="quick_comment_cntnr quick_comment_title">Quick Post</div>
+//							  <div class="quick_comment_cntnr">
+//								  <img src="https://graph.facebook.com/'.$_REQUEST['pageid'].'/picture?type=square" width="35" height="32" />
+//								  <input type="text" id="quickcomment2" value="Enter new Post ..." onfocus="if(this.value==\'Enter new Post ...\')this.value=\'\';" onblur="if(this.value==\'\') this.value=\'Enter new Post ...\';" class="quick_comment_txtbx" />
+//								  
+//								  <div class="quick_post_submit">
+//									<input type="button" value="Submit" class="button small green float_right" onclick="QuickPost(2);" />
+//								</div>
+//								<div style="clear:both;"></div>
+//								<div class="quick_comment_cntnr" id="add_new_post2" align="center" style="display:none;">
+//									<img src="http://panel.cuecow.com/images/ajax-loader.gif" />
+//								</div>
+//							  </div>
+//							  
+//						  </div>
+//						  <!-- Quick Comment -->';
 		
 		if($posted_by_others)
 		{		
@@ -322,7 +347,8 @@ else
 				{ 
 					$comments_feed = json_decode(@file_get_contents('https://graph.facebook.com/'.$values->id.'/comments?access_token='.$fbposts_get[0]['token'].'&limit=1000'));
 								
-					$return['msg_other'] .= '<div id="div_'.$values->id.'" style="display:block; background:#FFF; padding:10px; margin-bottom:20px; border-radius:6px ; -moz-border-radius:6px; width:95%; float:left;">
+					$return['msg_other'] .= '<div class="well well-small" style="float:left;">
+                                            <div id="div_'.$values->id.'" style="display:block; background:#FFF; padding:10px; margin-bottom:20px; border-radius:6px ; -moz-border-radius:6px; width:95%; float:left;">
 									<!-- post\'s details -->
 									<div style="width:100%; border-bottom:#CCC 1px solid; float:left;">
 										
@@ -370,7 +396,7 @@ else
 									
 									<!-- post\'s message -->
 									<div style="float:left; width:100%; padding-top:5px;">
-										<span style="font-size:11px; padding-bottom:15px;">'.$values->message.'</span>
+										<span class="facebook_message">'.$values->message.'</span>
 									</div>';
 									
 									if($values->picture) 
@@ -381,7 +407,7 @@ else
 									}
 									
 	
-									if($values->comments->count>3) 
+									if(count($values->comments->data) > 3) 
 									{ 
 									
 										$return['msg_other'] .= '<div style="padding:5px 4px 5px 5px; width:101.8%; height:37px; margin-top:15px; margin-left:-1.8%; border:#000 0px solid; background:url(\'http://panel.cuecow.com/images/comments-expander.gif\') repeat-x; float:left;" id="show_fullcomments_'.$values->id.'" align="center">
@@ -394,7 +420,7 @@ else
 					
 									$lastest_comment = array(); 
 									
-									if($values->comments->count>0 && count($comments_feed)) 
+									if(count($values->comments->data) > 0 && count($comments_feed)) 
 									{
 						
 										$return['msg_other'] .= '<!-- All Comment div -->                  
@@ -405,8 +431,11 @@ else
 													<div style="padding:5px; width:450px; margin-left:20px;">
 													<table style="margin-bottom:5px;">';
 													
-													if($values->comments->count>3)
-														$start_fill = $values->comments->count - 3;
+													if(count($values->comments->data) > 3)
+                                                                                                        {
+                                                                                                            $countt = count($values->comments->data);
+                                                                                                            $start_fill = $countt - 3;
+                                                                                                        }
 													else
 														$start_fill = 1;
 								
@@ -460,7 +489,7 @@ else
 												</td>
 											</tr>';
 									
-											if($h>$start_fill)
+											if($h>=$start_fill)
 												array_push($lastest_comment,$value1);
 									
 												$h++;
@@ -536,6 +565,7 @@ else
 							<input type="text" name="comment_'.$values->id.'" id="comment_'.$values->id.'" value="Post a comment ..." onfocus="if(this.value==\'Post a comment ...\')this.value=\'\';" onblur="if(this.value==\'\') this.value=\'Post a comment ...\';" style="width:85%; border:#CCC 1px solid; font-size:11px; padding:4px; color:#333;" onkeyup="IdentifyMe(event,\''.$values->id.'\',\''.$fbposts_get[0]['token'].'\');" />
 						</div>
 					</div>
+                                     </div>
 				</div>';
 															
 				}

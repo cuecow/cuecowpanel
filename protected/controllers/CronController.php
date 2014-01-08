@@ -37,6 +37,7 @@ public function actionCronEveryMinute()
 {	
 	ini_set('max_execution_time', 10000);
 	
+        //$this->UpdateUserFBPages();
 	$this->PostContentToFB();
 	$this->RunCampaign();
 	$this->VerifyCamapaign();
@@ -119,7 +120,6 @@ public function VerifyFSSpecial($campaign_id)
 {
 	$model = new Cron();
 	$fs_specials = $model->CronCampFSSpecial($campaign_id);
-	
 	if( count($fs_specials) )
 	{
 		foreach( $fs_specials as $key => $value )	
@@ -138,7 +138,7 @@ public function VerifyFSSpecial($campaign_id)
 						{
 							$specialid = $va;
 							$url = 'https://api.foursquare.com/v2/specials/'.$specialid.'/?oauth_token='.$store_token.'&v='.date('Ymd'); 
-							$result = file_get_contents($url);
+							$result = @file_get_contents($url);
 							$result_array = json_decode($result);
 							
 							if( count($result_array) )
@@ -258,6 +258,7 @@ public function RunCampaign()
 				
 			if( $new_start_date <= strtotime(now)/* && $new_end_date > strtotime(now)*/ )
 			{	
+                            
 				// get fs special
 				$Fs = $model->CronGetFSSpecial($rec['campaign_id']);
 				
@@ -1452,6 +1453,20 @@ public function UpdateUserFBPages()
 									$store_page_token = $token_model->StorePageAccessToken($name,$access_token_page,$page_id,$user_id);
 									$store_page_user  = $model->StoreUserPages($name,$page_id,$page_url,$status,$fans,$user_id);
 								}
+                                                                
+                                                                else if($verify_user_page > 0)
+                                                                {
+                                                                    //$curr_user = Yii::app()->user->user_id; 
+                                                                    //if($curr_user == $verify_user_page[0]['user_id'] && $verify_user_page[0]['page_name'] != $name && $verify_user_page[0]['page_id'] == $page_id)
+                                                                    //{
+                                                                        if($verify_user_page[0]['page_name'] != $name && $verify_user_page[0]['page_id'] == $page_id)
+                                                                        {
+
+                                                                            $status = $model->changePageName($name,$user_id,$page_id);
+                                                                        }
+                                                                    //}
+                                                                    
+                                                                }
 							}
 						}
 	

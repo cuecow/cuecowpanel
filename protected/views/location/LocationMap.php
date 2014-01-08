@@ -8,7 +8,7 @@ function initialize()
 		var latict;
 		var longict;
 		var countloc = <?php echo count($all_locations); ?>;
-		
+	
 		if(countloc!=0)
 		{
 			var locationpt = "<?php echo $var; ?>";

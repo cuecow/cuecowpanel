@@ -182,7 +182,6 @@ class User extends CActiveRecord
 	public function GetRecord()
 	{
 		$connection = Yii::app()->db;
-		
 		$sql = "SELECT * FROM ".$this->tableName(). " where user_id=".Yii::app()->user->user_id;
 		
 		$result = $connection->createCommand($sql)->queryAll();

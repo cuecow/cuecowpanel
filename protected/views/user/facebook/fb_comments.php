@@ -1,5 +1,14 @@
 <?php
 
+if($own == 1)
+{
+    $posted_by_me = $posted_by_me;
+}
+else
+{
+    $posted_by_me = $posted_by_others;
+}
+
 if($posted_by_me)
 {
 	$j = 1;
@@ -11,7 +20,7 @@ if($posted_by_me)
 			$comments_feed = json_decode(@file_get_contents('https://graph.facebook.com/'.$values->id.'/comments?access_token='.$fbposts_get[0]['token'].'&limit=1000'));
 			
 ?>
-<div class="well well-small" style="float:left;">
+<div id="div_msg<?php echo $values->id; ?>" class="well well-small" style="float:left;">
 	<div id="div_<?php echo $values->id; ?>" style="display:block; background:#FFF; padding:10px;border-radius:6px ; -moz-border-radius:6px; width:95%; float:left;">
     
     <!-- post's details -->
@@ -72,7 +81,10 @@ if($posted_by_me)
     </div>
                     
     <!-- View all comments div -->
-    <?php if($values->comments->count>3) { ?>
+    <?php
+        //var_dump(count($values->comments->data)); die();
+    if(count($values->comments->data) > 3) {
+        ?>
     
     <div class="facebook_comments" id="show_fullcomments_<?php echo $values->id; ?>" align="center">
         <a href="javascript:void(0);" onclick="show_all_comments('<?php echo $values->id; ?>');" style="text-decoration:underline;">view all <?=$values->comments->count?> comments</a>
@@ -81,19 +93,22 @@ if($posted_by_me)
                     
     <div style="float:left; width:100%;">
     
-        <?php  $lastest_comment = array(); if($values->comments->count>0 && count($comments_feed)) { ?>
+        <?php  $lastest_comment = array(); if(count($values->comments->data) > 0 && count($comments_feed)) { ?>
         
         <!-- All Comment div -->                  
         <div id="comments_<?php echo $values->id; ?>" style="display:none; float:left;">
-        <table style="margin-bottom:5px;" class="table">
+        <table class="table-content-brd" style="margin-bottom:5px;" class="table">
         <tr>
             <td> 
                 <div style="padding:5px; width:450px; margin-left:20px;">
                 <table style="margin-bottom:5px;">
 				<?php
                 
-                if($values->comments->count>3)
-                    $start_fill = $values->comments->count - 3;
+                if(count($values->comments->data) > 3)
+                {
+                    $countt = count($values->comments->data);
+                    $start_fill = $countt - 3;
+                }
                 else
                     $start_fill = 1;
                 
@@ -110,7 +125,7 @@ if($posted_by_me)
                             ?>
                         </td>
                         <td>
-                            <table style="margin:0px; padding:0px;">
+                            <table  style="margin:0px; padding:0px;">
                             <tr>
                                 <td>
                                     <span style="color:#036; font-weight:bold;">
@@ -137,11 +152,14 @@ if($posted_by_me)
                                             $temp_t_2 = explode('+',$temp_t_1[1]);
                                                                                     
                                         $time_t_2 = $temp_t_2[0];
-                                    }
+                                    } ?>
                                     
-                                    echo $date_t_1.' at '.$time_t_2;
+                                    <span class="facebook_time">
+                                        <?php echo $date_t_1.' at '.$time_t_2;; ?>
+                            
+                                    </span>
                                     
-                                    ?>
+                                    
                                 </td>
                             </tr>
                             </table>
@@ -149,7 +167,7 @@ if($posted_by_me)
                     </tr>
 					<?php
                         
-                        if($h>$start_fill)
+                        if($h>=$start_fill)
                             array_push($lastest_comment,$value1);
                         
                         $h++;
@@ -208,8 +226,12 @@ if($posted_by_me)
                                             $time_t_2 = $temp_t_2[0];
                                         }
                                         
-                                        echo $date_t_1.' at '.$time_t_2;
+                                        //echo $date_t_1.' at '.$time_t_2;
                                         ?>
+                                    <span class="facebook_time">
+                                        <?php echo $date_t_1.' at '.$time_t_2;; ?>
+                            
+                                    </span>
                                         </td>
                                     </tr>
                                     </table>
@@ -256,4 +278,5 @@ if($posted_by_me)
         }
     }
 }
+$flag = 0;
 ?>

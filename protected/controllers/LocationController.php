@@ -270,13 +270,14 @@ class LocationController extends Controller
 					}
 				}
 				
+                                $today_date = date('m/d/Y');
 				$model->user_id		=	Yii::app()->user->user_id;
 				$model->group_ids	=	substr($group_ids,0,strlen($group_ids)-1);
 				$model->name		=	$_POST['Location']['name'];
 				$model->fburl		=	$_POST['Location']['fburl'];
 				$model->fsurl		=	$_POST['Location']['fsurl'];
 				$model->googleurl	=	$_POST['Location']['googleurl'];
-				$model->dated		=	strtotime(now);
+				$model->dated		=	strtotime($today_date);
 				
 				if(!empty($_POST['Location']['fburl']))
 				{

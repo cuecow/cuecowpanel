@@ -10,7 +10,7 @@ $all_locations = $model->getallurl($date_duration_allurl);
 
 $h = 1;
 
-/*foreach($all_locations as $loc1)
+foreach($all_locations as $loc1)
 {
 	if(!empty($loc1['fburl']))
 	{
@@ -32,7 +32,7 @@ $h = 1;
 	$var = substr($a,0,-1);	
 	
 	$h++;
-}*/
+}
 
 ?>
 

@@ -580,20 +580,23 @@ class SiteController extends Controller
 		$model=new LoginForm;
 		
 		$facebook='';
-		
+		//var_dump(Yii::app()->user->auth_via); die();
 		if(isset(Yii::app()->user->auth_via))
 		{
+                    //var_dump('abc'); die();
 			$facebook = Yii::app()->user->auth_via;
 		}
 		
 		
 		if(isset(Yii::app()->user->user_id))
-		{			
+		{
+                    //var_dump('abc1'); die();
 			$this->redirect(Yii::app()->request->baseUrl.'/index.php/user/dashboard');
 		}
 		
 		if(!empty($_REQUEST['ref']) && !empty($_REQUEST['user']))
 		{
+                    //var_dump('abc2'); die();
 			$UpdateEmail = User::model()->SetEmail($_REQUEST['ref'],$_REQUEST['user']);	
 			
 			if($UpdateEmail)
@@ -603,6 +606,7 @@ class SiteController extends Controller
 		// if it is ajax validation request
 		if(isset($_POST['ajax']) && $_POST['ajax']==='login-form')
 		{
+                    //var_dump('abc3'); die();
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
 		}
@@ -610,11 +614,13 @@ class SiteController extends Controller
 		// collect user input data
 		if(isset($_POST['LoginForm']))
 		{
+                    //var_dump($_POST['LoginForm']); die();
 			$model->attributes=$_POST['LoginForm'];
 			// validate user input and redirect to the previous page if valid
 			
 			if($model->validate() && $model->login())
 			{
+                            //var_dump('abc5'); die();
 				$social_check = AccessToken::model()->CheckAuth();
 			
 				if(count($social_check)==0) 
@@ -626,6 +632,7 @@ class SiteController extends Controller
 		
 		if(!isset(Yii::app()->user->user_id))
 		{
+                    //var_dump('abc6'); die();
 			include('src/facebook.php');
 			
 			$facebook = new Facebook(array(
@@ -637,12 +644,14 @@ class SiteController extends Controller
 		
 			if($user)
 			{
+                            //var_dump('abc7'); die();
 				Yii::app()->session['flogout'] = $facebook->getLogoutUrl();
 				
 				$user_profile = $facebook->api('/me');
 
 				if(count($user_profile))
 				{
+                                    //var_dump('abc8'); die();
 					$facebook_id = $user_profile['id'];
 					$account_name = $user_profile['username'];
 					$fname = $user_profile['first_name'];
@@ -672,11 +681,13 @@ class SiteController extends Controller
 					}
 				}
 			}
-			else
+			else{
+                            //var_dump('abc10'); die();
 				$fbloginUrl = $facebook->getLoginUrl(array('scope'=> 'email,user_birthday,publish_stream,create_event,publish_checkins,offline_access','redirect_uri'=> 'http://panel.cuecow.com/index.php/site/login'));
-				
+                                //var_dump($fbloginUrl); die();
+                        }
 		}
-		
+		//var_dump('end'); die();
 		// display the login form
 		$this->render('login',array('model'=>$model,'facebook'=>$facebook,'fbloginUrl'=>$fbloginUrl));
 	}

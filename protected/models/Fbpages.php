@@ -229,6 +229,26 @@ class Fbpages extends CActiveRecord
 				
 		return $final_result;
 	}
+        
+//        public function checkPageName($name,$user_id,$page_id)
+//        {
+//            $connection = Yii::app()->db;
+//            $sql = "SELECT * FROM fbpages where user_id=".$userid." and page_name=".$name." and page_id=".$page_id;
+//            $result = $connection->createCommand($sql)->queryAll();
+//		
+//            return count($result);
+//        }
+        
+        public function changePageName($name,$user_id,$page_id)
+        {
+            $connection = Yii::app()->db;
+            //var_dump('in db'); die();
+            $sql = "update fbpages set page_name='".$name."' where user_id='".$user_id."' and page_id='".$page_id."'";
+            $result = $connection->createCommand($sql);
+			
+            $final_result = $result->execute();
+            return $final_result;
+        }
 	
 	public function CountUserPages($status = '')
 	{
@@ -326,8 +346,8 @@ class Fbpages extends CActiveRecord
 	
 	public function VerifyUserPages($user_id, $page_id)
 	{
+            //var_dump($this->tableName()); die(); fbpages
 		$connection = Yii::app()->db;
-		
 		$sql = "SELECT * FROM ".$this->tableName()." where user_id=".$user_id." and page_id=".$page_id ;
 		
 		$result = $connection->createCommand($sql)->queryAll();
@@ -345,4 +365,13 @@ class Fbpages extends CActiveRecord
 		
 		$res = $result->execute();
 	}
+        
+        public function GetPagesDetail()
+        {
+            $connection = Yii::app()->db;
+		
+            $sql_chk = "SELECT * FROM user_pages_token where user_id=".Yii::app()->user->user_id;
+            $result = $connection->createCommand($sql_chk)->queryAll();
+            return $result;
+        }
 }

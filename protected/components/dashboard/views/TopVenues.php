@@ -1,6 +1,8 @@
 <?php 
 
 $top_location = Location::model()->GetTopLocation(); 
+//$reach = $model_fb->GetPagesToken();
+
 
 if(count($top_location))
 {
@@ -35,6 +37,10 @@ if(count($top_location))
 	array_multisort($location_sorted, SORT_DESC, $location_sorted);
 }
 
+$fblikes_total = ($location_sorted[0]['fblikes']+$location_sorted[1]['fblikes']+$location_sorted[2]['fblikes']+$location_sorted[3]['fblikes']+$location_sorted[4]['fblikes']);
+$checkin_total = ($location_sorted[0]['tot_checkin']+$location_sorted[1]['tot_checkin']+$location_sorted[2]['tot_checkin']+$location_sorted[3]['tot_checkin']+$location_sorted[4]['tot_checkin']);
+
+$fblikes_total = number_format($fblikes_total);
 
 ?>         
 
@@ -140,7 +146,30 @@ if(count($top_location))
         
         <div id="collapseTwo" class="accordion-body collapse in">
             <div class="accordion-inner">
-
+                <ul class="arrow-content-list">
+                    <li>
+                        <div class="box-cnt-main">
+                            <label class="label-text">Total likes</label>
+                            <i class="ico-thumbs-up list-arrow"></i>
+                            <p class="arrow-count"><?php echo $fblikes_total ?></p>
+                        </div>
+                </li>
+                <li>
+                    <div class="box-cnt-main">
+                        <label class="label-text">Total checkins</label>
+                        <i class="ico-check list-arrow"></i>
+                        <p class="arrow-count"><?php echo $checkin_total ?></p>
+                    </div>
+                </li>
+                <li>
+                    <div class="box-cnt-main">
+                    <label class="label-text">Reach</label>
+                    <i class="ico-parents list-arrow"></i>
+                    <p class="arrow-count"><?php echo $social_reach ?></p>
+                    </div>
+                </li>
+                </ul>
+                <div class="clearfix"></div>
                <?php if(count($top_location)) { ?>
 			   <script>
                 
@@ -207,6 +236,65 @@ if(count($top_location))
 					});					   
 				});
                 </script>
+                
+<!--                <script>
+                    var chart;
+				$(document).ready(function() {
+        chart = new Highcharts.Chart({
+            chart: {
+                	renderTo: 'location_graph'
+                    //defaultSeriesType: 'column'
+				},
+            title: {
+                text: 'Top 5 Locations',
+                x: -20 //center
+            },
+            xAxis: {
+                categories: [
+                    	'<?php echo $location_sorted[0]['name'] ?>', 
+                        '<?php echo $location_sorted[1]['name'] ?>', 
+                        '<?php echo $location_sorted[2]['name'] ?>', 
+                        '<?php echo $location_sorted[3]['name'] ?>', 
+                        '<?php echo $location_sorted[4]['name'] ?>'
+					]
+            },
+            yAxis: {
+				   	min: -1,
+				   	title: {
+						text: ''
+				   	}
+				},
+            tooltip: {
+				   	formatter: function() {
+					return ''+
+						 this.x +': '+ this.y +'';
+				   	}
+				},
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'middle',
+                borderWidth: 0
+            },
+            series: [{
+                	name: 'Checkin',
+                    data: [<?php echo $location_sorted[0]['tot_checkin'] ?>, <?php echo $location_sorted[1]['tot_checkin'] ?>, <?php echo $location_sorted[2]['tot_checkin'] ?>,<?php echo $location_sorted[3]['tot_checkin'] ?>, <?php echo $location_sorted[4]['tot_checkin'] ?>]
+                }, {
+                	name: 'FBlikes',
+                    data: [<?php echo $location_sorted[0]['fblikes'] ?>, <?php echo $location_sorted[1]['fblikes'] ?>, <?php echo $location_sorted[2]['fblikes'] ?>,<?php echo $location_sorted[3]['fblikes'] ?>, <?php echo $location_sorted[4]['fblikes'] ?>]
+                    
+						}]
+//            series: [{
+//                	name: 'Checkin',
+//                    data: [5, 10, 15,20,25]
+//                }, {
+//                	name: 'FBlikes',
+//                    data: [15, 20, 40,50]
+//                    }]
+        });
+    });
+    
+                </script>-->
                 
                 <div class="field-content-44">
                 	<div id="location_graph"></div>

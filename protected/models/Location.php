@@ -1283,82 +1283,82 @@ class Location extends CActiveRecord
 	
 	function return_unicode($string)
 	{
-		$string=str_replace('À','&Agrave;',$string);
-		$string=str_replace('à','&agrave;',$string);
-		$string=str_replace('Á','&Aacute;',$string);
-		$string=str_replace('á','&aacute;',$string);
-		$string=str_replace('Â','&Acirc;',$string);
+		$string=str_replace('ï¿½','&Agrave;',$string);
+		$string=str_replace('ï¿½','&agrave;',$string);
+		$string=str_replace('ï¿½','&Aacute;',$string);
+		$string=str_replace('ï¿½','&aacute;',$string);
+		$string=str_replace('ï¿½','&Acirc;',$string);
 		
-		$string=str_replace('â','&acirc;',$string);
+		$string=str_replace('ï¿½','&acirc;',$string);
 		
-		$string=str_replace('Ã','&Atilde;',$string);
+		$string=str_replace('ï¿½','&Atilde;',$string);
 		
-		$string=str_replace('ã','&atilde;',$string);
+		$string=str_replace('ï¿½','&atilde;',$string);
 		
-		$string=str_replace('Ä','&Auml;',$string);
+		$string=str_replace('ï¿½','&Auml;',$string);
 		
-		$string=str_replace('ä','&auml;',$string);
+		$string=str_replace('ï¿½','&auml;',$string);
 		
-		$string=str_replace('Å','&Aring;',$string);
-		$string=str_replace('å','&aring;',$string);
+		$string=str_replace('ï¿½','&Aring;',$string);
+		$string=str_replace('ï¿½','&aring;',$string);
 		
 		
-		$string=str_replace('Æ','&AElig;',$string);
+		$string=str_replace('ï¿½','&AElig;',$string);
 		
-		$string=str_replace('æ','&aelig;',$string);
+		$string=str_replace('ï¿½','&aelig;',$string);
 		
-		$string=str_replace('Ç','&Ccedil;',$string);
-		$string=str_replace('ç','&ccedil;',$string);
+		$string=str_replace('ï¿½','&Ccedil;',$string);
+		$string=str_replace('ï¿½','&ccedil;',$string);
 		
-		$string=str_replace('Ð','&ETH;',$string);
-		$string=str_replace('ð','&eth;',$string);
-		$string=str_replace('È','&Egrave;',$string);
-		$string=str_replace('è','&egrave;',$string);
-		$string=str_replace('É','&Eacute;',$string);
-		$string=str_replace('é','&eacute;',$string);
-		$string=str_replace('Ê','&Ecirc;',$string);
-		$string=str_replace('ê','&ecirc;',$string);
-		$string=str_replace('Ë','&Euml;',$string);
-		$string=str_replace('ë','&euml;',$string);
-		$string=str_replace('Ì','&Igrave;',$string);
-		$string=str_replace('ì','&igrave;',$string);
-		$string=str_replace('Í','&Iacute;',$string);
-		$string=str_replace('í','&iacute;',$string);
-		$string=str_replace('Î','&Icirc;',$string);
-		$string=str_replace('î','&icirc;',$string);
-		$string=str_replace('Ï','&Iuml;',$string);
-		$string=str_replace('ï','&iuml;',$string);
-		$string=str_replace('Ñ','&Ntilde;',$string);
-		$string=str_replace('ñ','&ntilde;',$string);
-		$string=str_replace('Ò','&Ograve;',$string);
-		$string=str_replace('ò','&ograve;',$string);
-		$string=str_replace('Ó','&Oacute;',$string);
-		$string=str_replace('ó','&oacute;',$string);
-		$string=str_replace('Ô','&Ocirc;',$string);
-		$string=str_replace('ô','&ocirc;',$string);
-		$string=str_replace('Õ','&Otilde;',$string);
-		$string=str_replace('õ','&otilde;',$string);
-		$string=str_replace('Ö','&Ouml;',$string);
-		$string=str_replace('ö','&ouml;',$string);
-		$string=str_replace('Ø','&Oslash;',$string);
-		$string=str_replace('ø','&oslash;',$string);
-		$string=str_replace('Œ','&OElig;',$string);
-		$string=str_replace('œ','&oelig;',$string);
-		$string=str_replace('ß','&szlig;',$string);
-		$string=str_replace('Þ','&THORN;',$string);
-		$string=str_replace('þ','&thorn;',$string);
-		$string=str_replace('Ù','&Ugrave;',$string);
-		$string=str_replace('ù','&ugrave;',$string);
-		$string=str_replace('Ú','&Uacute;',$string);
-		$string=str_replace('ú','&uacute;',$string);
-		$string=str_replace('Û','&Ucirc;',$string);
-		$string=str_replace('û','&ucirc;',$string);
-		$string=str_replace('Ü','&Uuml;',$string);
-		$string=str_replace('ü','&uuml;',$string);
-		$string=str_replace('Ý','&Yacute;',$string);
-		$string=str_replace('ý','&yacute;',$string);
-		$string=str_replace('Ÿ','&Yuml;',$string);
-		$string=str_replace('ÿ','&yuml;',$string);
+		$string=str_replace('ï¿½','&ETH;',$string);
+		$string=str_replace('ï¿½','&eth;',$string);
+		$string=str_replace('ï¿½','&Egrave;',$string);
+		$string=str_replace('ï¿½','&egrave;',$string);
+		$string=str_replace('ï¿½','&Eacute;',$string);
+		$string=str_replace('ï¿½','&eacute;',$string);
+		$string=str_replace('ï¿½','&Ecirc;',$string);
+		$string=str_replace('ï¿½','&ecirc;',$string);
+		$string=str_replace('ï¿½','&Euml;',$string);
+		$string=str_replace('ï¿½','&euml;',$string);
+		$string=str_replace('ï¿½','&Igrave;',$string);
+		$string=str_replace('ï¿½','&igrave;',$string);
+		$string=str_replace('ï¿½','&Iacute;',$string);
+		$string=str_replace('ï¿½','&iacute;',$string);
+		$string=str_replace('ï¿½','&Icirc;',$string);
+		$string=str_replace('ï¿½','&icirc;',$string);
+		$string=str_replace('ï¿½','&Iuml;',$string);
+		$string=str_replace('ï¿½','&iuml;',$string);
+		$string=str_replace('ï¿½','&Ntilde;',$string);
+		$string=str_replace('ï¿½','&ntilde;',$string);
+		$string=str_replace('ï¿½','&Ograve;',$string);
+		$string=str_replace('ï¿½','&ograve;',$string);
+		$string=str_replace('ï¿½','&Oacute;',$string);
+		$string=str_replace('ï¿½','&oacute;',$string);
+		$string=str_replace('ï¿½','&Ocirc;',$string);
+		$string=str_replace('ï¿½','&ocirc;',$string);
+		$string=str_replace('ï¿½','&Otilde;',$string);
+		$string=str_replace('ï¿½','&otilde;',$string);
+		$string=str_replace('ï¿½','&Ouml;',$string);
+		$string=str_replace('ï¿½','&ouml;',$string);
+		$string=str_replace('ï¿½','&Oslash;',$string);
+		$string=str_replace('ï¿½','&oslash;',$string);
+		$string=str_replace('ï¿½','&OElig;',$string);
+		$string=str_replace('ï¿½','&oelig;',$string);
+		$string=str_replace('ï¿½','&szlig;',$string);
+		$string=str_replace('ï¿½','&THORN;',$string);
+		$string=str_replace('ï¿½','&thorn;',$string);
+		$string=str_replace('ï¿½','&Ugrave;',$string);
+		$string=str_replace('ï¿½','&ugrave;',$string);
+		$string=str_replace('ï¿½','&Uacute;',$string);
+		$string=str_replace('ï¿½','&uacute;',$string);
+		$string=str_replace('ï¿½','&Ucirc;',$string);
+		$string=str_replace('ï¿½','&ucirc;',$string);
+		$string=str_replace('ï¿½','&Uuml;',$string);
+		$string=str_replace('ï¿½','&uuml;',$string);
+		$string=str_replace('ï¿½','&Yacute;',$string);
+		$string=str_replace('ï¿½','&yacute;',$string);
+		$string=str_replace('ï¿½','&Yuml;',$string);
+		$string=str_replace('ï¿½','&yuml;',$string);
 		
 		return $string;	
 	}

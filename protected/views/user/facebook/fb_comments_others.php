@@ -1,5 +1,4 @@
 <?php
-
 if($posted_by_others)
 {
 	$j = 1;
@@ -8,9 +7,9 @@ if($posted_by_others)
     	if(!empty($values->message))
 		{ 
 			$comments_feed = json_decode(@file_get_contents('https://graph.facebook.com/'.$values->id.'/comments?access_token='.$fbposts_get[0]['token'].'&limit=1000'));
-			
+			//var_dump($comments_feed); die();
 ?>
-		<div class="well well-small" style="float:left;">
+		<div id="div_msg<?php echo $values->id; ?>" class="well well-small" style="float:left;">
 			<div id="div_<?php echo $values->id; ?>" style="display:block; background:#FFF; padding:10px; margin-bottom:20px; border-radius:6px ; -moz-border-radius:6px; width:95%; float:left;">
             	<!-- post's details -->
                 <div style="width:100%; border-bottom:#CCC 1px solid; float:left;">
@@ -73,7 +72,7 @@ if($posted_by_others)
                 </div>
                 
                 <!-- View all comments div -->
-                <?php if($values->comments->count>3) { ?>
+                <?php if(count($values->comments->data) > 3) { ?>
                 <div style="padding:5px 4px 5px 5px; width:101.8%; height:37px; margin-top:15px; margin-left:-1.8%; border:#000 0px solid; background:url('<?php echo Yii::app()->request->baseUrl; ?>/images/comments-expander.gif') repeat-x; float:left;" id="show_fullcomments_<?php echo $values->id; ?>" align="center">
                     <a href="javascript:void(0);" onclick="show_all_comments('<?php echo $values->id; ?>');" style="text-decoration:underline;">view all <?=$values->comments->count?> comments</a>
                 </div>
@@ -81,11 +80,11 @@ if($posted_by_others)
                 
                 <div style="float:left; width:100%;">
                 
-                    <?php  $lastest_comment = array(); if($values->comments->count>0 && count($comments_feed)) { ?>
-                    
+                    <?php  $lastest_comment = array(); if(count($values->comments->data) > 0 && count($comments_feed)) { ?>
                     <!-- All Comment div -->                  
                     <div id="comments_<?php echo $values->id; ?>" style="display:none; float:left;">
-                    <table style="margin-bottom:5px;">
+                       
+                        <table style="margin-bottom:5px;">
                     <tr>
                         <td> 
                             <div style="padding:5px; width:450px; margin-left:20px;">
@@ -94,11 +93,15 @@ if($posted_by_others)
                             
                             
                             
-                            if($values->comments->count>3)
-                                $start_fill = $values->comments->count - 3;
+                            if(count($values->comments->data) > 3)
+                            {  
+                                $countt = count($values->comments->data);
+                                $start_fill = $countt - 3;
+                            }
                             else
+                            {
                                 $start_fill = 1;
-                            
+                            }
                             $h= 1;
                             
                             foreach($comments_feed->data as $key1=>$value1)
@@ -151,9 +154,9 @@ if($posted_by_others)
                             </tr>
                             <?php
                                 
-                                if($h>$start_fill)
+                                if($h >= $start_fill){
                                     array_push($lastest_comment,$value1);
-                                
+                                }
                                 $h++;
                             }
                             ?>
@@ -164,12 +167,11 @@ if($posted_by_others)
                     </tr>
                     </table>
                     </div>
-                    
                     <!-- Short Comment div -->
                     <div id="short_comments_<?php echo $values->id; ?>" style="padding:5px; width:450px; margin-left:20px;">
                         <table style="margin:0px; padding:0px;">
                         <?php
-                            
+                            //var_dump(count($lastest_comment)); die();
                             if(count($lastest_comment))
                             {
                                 foreach($lastest_comment as $key1=>$val1)

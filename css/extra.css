@@ -47,7 +47,17 @@
 {border:#999 0px solid; padding:5px;}
 
 .facebook_comments
-{padding:5px 4px 5px 5px; width:101.8%; height:37px; font-family:Verdana, Geneva, sans-serif; font-size:11px; margin-top:15px; margin-left:-1.8%; border:#000 0px solid; background:url('../images/comments-expander.gif') repeat-x; float:left;}
+{
+    padding:5px 4px 5px 5px; 
+    width:101.8%; 
+/*    height:37px; */
+    font-family:Verdana, Geneva, sans-serif; 
+    font-size:11px; 
+/*    margin-top:15px; */
+    margin-left:-1.8%; 
+    border:#000 0px solid; 
+    background:url('../images/comments-expander.gif') repeat-x; float:left;
+}
 
 #floatingdiv
 {

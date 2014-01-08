@@ -1,4 +1,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+<!--<script src="http://code.highcharts.com/highcharts.js"></script>-->
+
 <script type="text/javascript" src="<? echo Yii::app()->request->baseUrl; ?>/js/hcharts/js/highcharts.js"></script>
 
 <div class="container">
@@ -62,9 +64,10 @@
 					<div id="collapseThree" class="accordion-body collapse in">
 					
 						<div class="accordion-inner">
+                                                    <div style="height:650px; overflow: auto">
 			
 							<?php $this->widget('application.components.dashboard.LatestFBPosts'); ?>
-							
+                                                    </div>
 						</div>
 					</div>
 					
@@ -96,7 +99,6 @@
 	</div>
 
 </div>
-
 
 <script>
 

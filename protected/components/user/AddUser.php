@@ -56,7 +56,9 @@ class AddUser extends CWidget {
 					
 					$model->save();
 					
-					$this->redirect(array('usermanagement'));
+                                        $url = $this->controller->createUrl('user/Usermanagement');
+                                        $this->controller->redirect($url);
+					//$this->redirect(array('user/usermanagement'));
 				}
 				else
 				{

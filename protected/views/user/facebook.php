@@ -34,7 +34,7 @@ function QuickPost(cmfrm)
 	var token = $('#current_token').val();
 	var userid = $('#unique_user').val();
 	
-	if($('#quickcomment1').val()!='Enter new Post ...')
+	if($('#quickcomment1').val()!='Enter new Post ...' && $('#quickcomment1').val()!='')
 	{
 		var comment = $('#quickcomment1').val();
 		var resetbox = 'quickcomment1';
@@ -61,7 +61,9 @@ function QuickPost(cmfrm)
 				
 				$('#'+resetbox).val('Post a comment ...');
 				
-				LoadPageAgain(pageid,userid,token);
+//				var pathname = window.location.pathname;
+//                                top.location.href = pathname;
+                                LoadPageAgain(pageid,userid,token);
 				
 			},
 			error : function(jqXHR, XMLHttpRequest, textStatus, errorThrown) {
@@ -84,7 +86,7 @@ function LoadPageAgain(pageid,userid,token)
 		success : function(data){
 			$('#post_content').html(data.msg);
 			$('#post_content_others').html(data.msg_other);
-			
+
 			$('#current_page').val(pageid);
 			$('#current_token').val(token);
 		},
@@ -202,6 +204,7 @@ function CommenttoFB(id,message,accesstoken)
 		dataType : 'json',
 		data: 'id='+ id + '&msg='+ message + '&accesstoken='+ accesstoken,
 		success : function(data){
+                    alert('abc');
 			$('#comments_'+id).html(data.msg);
 			$('#comment_'+id).val('');
 		},
@@ -230,6 +233,7 @@ function DeletePost(id,token)
 		{
 			//if(data.msg==1)
 			$('#div_'+id).html('');
+                        $('#div_msg'+id).hide();
 		},
 		error : function(XMLHttpRequest, textStatus, errorThrown) {//alert(errorThrown);
 		}
@@ -238,6 +242,7 @@ function DeletePost(id,token)
 
 function show_all_comments(id)
 {
+    alert('abc'); 
 	document.getElementById('comments_'+id).style.display = 'block';
 	document.getElementById('short_comments_'+id).style.display = 'none';
 	document.getElementById('show_fullcomments_'+id).style.display = 'none';

@@ -350,8 +350,9 @@
 		</div>
         
         <br />
-        <input type="submit" name="submit" class="btn btn-large" style="float:right;" value="GO campaign" />
         <input type="hidden" name="savedid" id="savedid" value="<?php echo $PendingCamp[0]['campaign_id']; ?>" />
+        <input type="submit" name="submit" class="btn btn-large" style="float:right;" value="GO campaign" />
+        
         
     </div>
 </div>
