@@ -682,7 +682,7 @@ class SiteController extends Controller
 				}
 			}
 			else{
-                            //var_dump('abc10'); die();
+                           // var_dump('abc10'); die();
 				$fbloginUrl = $facebook->getLoginUrl(array('scope'=> 'email,user_birthday,publish_stream,create_event,publish_checkins,offline_access','redirect_uri'=> 'http://panel.cuecow.com/index.php/site/login'));
                                 //var_dump($fbloginUrl); die();
                         }

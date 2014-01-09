@@ -85,13 +85,20 @@ if(!function_exists('getContent'))
 	function getContent($contentId, $langId = 1, $defaultText = '')
 	{	
 		// for online server, uncomment belowe lines
+                $GetRecord = Contents::model()->GetRecord($contentId,$langId);
+                $GetRecord_c = Yii::app()->cache->get($contentId.$langId);
+                if($GetRecord_c != $GetRecord['content_text'])
+                {
+                    Yii::app()->cache->delete($contentId.$langId);
+                }
+                
 		if(Yii::app()->cache->get($contentId.$langId)===false)
 		{
 			$GetRecord = Contents::model()->GetRecord($contentId,$langId);
 			Yii::app()->cache->set($contentId.$langId, $GetRecord['content_text']);
 			$GetRecord = $GetRecord['content_text'];
 		}
-    	else
+                else
 			$GetRecord = Yii::app()->cache->get($contentId.$langId);
 		
 		if(!empty($GetRecord))

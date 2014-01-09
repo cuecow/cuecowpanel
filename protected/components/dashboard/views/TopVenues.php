@@ -1,9 +1,9 @@
 <?php 
-
+//var_dump(Yii::app()->user->user_id); die();
 $top_location = Location::model()->GetTopLocation(); 
 //$reach = $model_fb->GetPagesToken();
 
-
+//var_dump(count($top_location)); die();
 if(count($top_location))
 {
 	$location_sorted = array();
@@ -37,10 +37,24 @@ if(count($top_location))
 	array_multisort($location_sorted, SORT_DESC, $location_sorted);
 }
 
-$fblikes_total = ($location_sorted[0]['fblikes']+$location_sorted[1]['fblikes']+$location_sorted[2]['fblikes']+$location_sorted[3]['fblikes']+$location_sorted[4]['fblikes']);
-$checkin_total = ($location_sorted[0]['tot_checkin']+$location_sorted[1]['tot_checkin']+$location_sorted[2]['tot_checkin']+$location_sorted[3]['tot_checkin']+$location_sorted[4]['tot_checkin']);
+$fblikes_total = 0;
+$checkin_total = 0;
+//var_dump(count($location_sorted)); die();
+//var_dump($location_sorted); die();
+
+foreach($location_sorted as $key=>$value)
+{
+    //var_dump($value['fblikes']);
+    $fblikes_total = $fblikes_total + $value['fblikes'];
+    $checkin_total = $checkin_total + $value['tot_checkin'];
+}
+
+//$fblikes_total = ($location_sorted[0]['fblikes']+$location_sorted[1]['fblikes']+$location_sorted[2]['fblikes']+$location_sorted[3]['fblikes']+$location_sorted[4]['fblikes']);
+//$checkin_total = ($location_sorted[0]['tot_checkin']+$location_sorted[1]['tot_checkin']+$location_sorted[2]['tot_checkin']+$location_sorted[3]['tot_checkin']+$location_sorted[4]['tot_checkin']);
+
 
 $fblikes_total = number_format($fblikes_total);
+$checkin_total = number_format($checkin_total);
 
 ?>         
 
@@ -163,7 +177,7 @@ $fblikes_total = number_format($fblikes_total);
                 </li>
                 <li>
                     <div class="box-cnt-main">
-                    <label class="label-text">Reach</label>
+                    <label class="label-text">Audience</label>
                     <i class="ico-parents list-arrow"></i>
                     <p class="arrow-count"><?php echo $social_reach ?></p>
                     </div>
@@ -205,15 +219,24 @@ $fblikes_total = number_format($fblikes_total);
 						text: ''
 				   	}
 				},
-				legend: {
-				   	layout: 'vertical',
-				   	align: 'center',
-				   	verticalAlign: 'top',
-				   	x: 110,
-				   	y: -10,
-				   	floating: true,
-				   	shadow: true
-				},
+//				legend: {
+//				   	layout: 'vertical',
+//				   	align: 'left',
+//				   	verticalAlign: 'top',
+//				   	//x: 110,
+//				   	//y: -10
+//				   	//floating: true,
+//				   	//shadow: true
+//				},
+                                legend: {
+                                    layout: 'vertical',
+                                    align: 'right',
+                                    verticalAlign: 'top',
+                                    x: -8,
+                                    y: -10,
+                                    floating: true,
+                                    borderWidth: 0
+                                },
 				tooltip: {
 				   	formatter: function() {
 					return ''+

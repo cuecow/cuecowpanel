@@ -1124,9 +1124,9 @@ class Location extends CActiveRecord
 		$get_max_likes = '';
 		
 		if(!empty($final_ids))
-			$sql = 'SELECT * from location where loc_id IN('.$final_ids.') and user_id = '.Yii::app()->user->user_id.' ORDER BY FIND_IN_SET(loc_id, "'.$final_ids.'") LIMIT 0,10';
+			$sql = 'SELECT * from location where loc_id IN('.$final_ids.') and user_id = '.Yii::app()->user->user_id.' ORDER BY FIND_IN_SET(loc_id, "'.$final_ids.'")';
 		else
-			$sql = "SELECT * from location where (loc_id IN (SELECT loc_id from fburlinfo where fburl_id IN (SELECT fburl_id FROM  `fburl_data` GROUP BY `fburl_id` ORDER BY SUM(`likes`) DESC)) OR loc_id IN (SELECT loc_id from fsurlinfo where fsurl_id IN (SELECT fsurl_id FROM `fsurl_data` GROUP BY  `fsurl_id` ORDER BY SUM(`checkinsCount`) DESC)) OR loc_id IN (SELECT loc_id from gurlinfo where gurl_id IN (SELECT gurl_id FROM `gurl_data` GROUP BY  `gurl_id` ORDER BY SUM(`glikes`) DESC) )) and user_id = ".Yii::app()->user->user_id." LIMIT 0,10";
+			$sql = "SELECT * from location where (loc_id IN (SELECT loc_id from fburlinfo where fburl_id IN (SELECT fburl_id FROM  `fburl_data` GROUP BY `fburl_id` ORDER BY SUM(`likes`) DESC)) OR loc_id IN (SELECT loc_id from fsurlinfo where fsurl_id IN (SELECT fsurl_id FROM `fsurl_data` GROUP BY  `fsurl_id` ORDER BY SUM(`checkinsCount`) DESC)) OR loc_id IN (SELECT loc_id from gurlinfo where gurl_id IN (SELECT gurl_id FROM `gurl_data` GROUP BY  `gurl_id` ORDER BY SUM(`glikes`) DESC) )) and user_id = ".Yii::app()->user->user_id."";
 		
 		$location = $connection->createCommand($sql)->queryAll();
 

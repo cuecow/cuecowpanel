@@ -21,6 +21,7 @@
 			else if($_REQUEST['view'] == 'invoices')
 			{
 				include('UserInvoices.php');
+                                
 			}
 			else if($_REQUEST['view'] == 'detail_invoice')
 			{
