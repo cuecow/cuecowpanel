@@ -1,9 +1,9 @@
 /* Login Extra CSS */
 
-#login-wrapper { padding:20px 0; width:415px; margin:0 auto; }
+#login-wrapper { padding:20px 0; /* width:415px;*/ margin:0 auto; }
 #logo { width:100%; height:62px; margin:0 0 15px; }
 #logo h1 { margin:0; text-indent:-9999px; height:157px; background: url('../images/cuecow-logo.png') no-repeat center center; }
-.login_div{ margin-top:100px; margin-left:-70px;}
+.login_div{ margin: 110px auto 0px auto; max-width: 570px !important; float: none;}
 .under-form { text-align:center; width:100%; font-size:11px; color:#666; margin-left:20px; }
 .login label { color:#666; font-weight:normal; margin:5px 0 0px 0; width:150px; }
 .login_field-content-44-left {float:left; padding-right:15px; width:25%; }
@@ -11,6 +11,10 @@
 .login_field-content-44-right {float:right; width:75%; padding-left:10px; border-left:0px solid #ccc;}
 .no-left-border{ border-left:0px;}
 .forgot_pass{ text-align:right; width:310px;}
+
+.login_field-content-44-right.left-content-fld > input {
+    width: 81% !important;
+}
 
 /* FOOTER																		*/
 /* ---------------------------------------------------------------------------- */
@@ -149,3 +153,14 @@ div.datainsert { margin-bottom: 10px; font-size: 11px;}
 .clear {clear: both;}
 
 .mendatory_red{ color:#FF0000; }
+
+@media (min-width: 320px) and (max-width: 480px) {
+    .login_field-content-44-right {
+        float: none;
+        padding-left: 0px;
+    }
+    
+    .left-content-fld {
+        width: 104% !important;
+    }
+}

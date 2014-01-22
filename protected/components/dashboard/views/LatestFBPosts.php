@@ -1,4 +1,147 @@
+<?php 
+//var_dump($records); die();
+$count = count($records);
+//$page = $records[0]['page_id'];
+//var_dump($records);
+$user_curr = Yii::app()->user->user_id;
+?>
 <script>
+$(document).ready(function(){
+
+    //var posts = '<?= $page ?>';
+    var curr_user = '<?= $user_curr ?>';
+    //alert(posts);
+    //alert(curr_user);
+    $.ajax({
+		type : 'POST',
+		url : '<?php echo Yii::app()->request->baseUrl; ?>/ajax/getPosts.php',
+		dataType : 'json',
+
+                //data: 'records='+ posts + '&user='+ curr_user,
+                data: 'user='+ curr_user,
+		success : function(response){
+                    //alert('result');
+                    console.log(response);
+                    
+                    resultdata = response['result'];
+                    ids = response['pages_id'];
+                    console.log(resultdata[0].acc);
+                    
+                    //alert(resultdata[0].to.data[0].name);
+                    for(var i=0;i<11;i++)
+                        {
+                            dataHTML = '<div id="div_msg'+resultdata[i].id+'" class="well well-small post_width" style="float:left;">';
+                            dataHTML += '<div id="div_'+resultdata[i].id+'" style="display:block; background:#FFF; padding:10px;border-radius:6px ; -moz-border-radius:6px; width:95%; float:left;">';
+                            dataHTML += '<div style="width:100%; border-bottom:#EEE 1px solid; float:left;">';
+                            
+                            dataHTML += '<div style="padding-bottom:10px; width:12%; margin-left:2%; float:left;">';
+                            dataHTML += '<img src="https://graph.facebook.com/'+resultdata[i].from.id+'/picture?type=square" />';
+                            dataHTML += '</div>';
+                            
+                            dataHTML += '<div style="width:76%; float:left;">';
+                            dataHTML += '<table border="0" cellpadding="0" cellspacing="0" width="100%">';
+                            
+                            dataHTML += '<tr>';
+                            dataHTML += '<td class="facebook_pagename">'+resultdata[i].from.name+'</td>';
+                            dataHTML += '</tr>';
+                            
+                            if(resultdata[i].to != undefined){
+                            dataHTML += '<tr>';
+                            dataHTML += '<td>';
+                            dataHTML += '<span class="facebook_time">'+resultdata[i].to.data[0].name+'</span>';
+                            }
+                            dataHTML += '</td>';
+                            dataHTML += '</tr>';
+                            
+                            dataHTML += '<tr>';
+                            dataHTML += '<td>';
+                            
+                            
+                                
+                            if(resultdata[i].created_time) 
+                            {
+                                //alert(resultdata[i].created_time);
+                                var str = resultdata[i].created_time;
+                                var temp_t1 = str.split('T');
+                                var date_t = temp_t1[0];
+
+
+                                if(temp_t1[1])
+                                {
+                                    var str1 = temp_t1[1];
+
+                                    var temp_t2 = str1.split('+');
+
+                                }
+
+                                var time_t = temp_t2[0];
+                            }
+
+                            
+                            dataHTML += '<span class="facebook_time">'+date_t+' at '+time_t+'';
+
+                            if(resultdata[i].application)
+                                {
+                                dataHTML += ' via ' + resultdata[i].application.name;
+                                }
+                            dataHTML += '</span>';
+                            
+                            
+                            
+                            dataHTML += '</td>';
+                            dataHTML += '</tr>';
+                            
+                            
+                            
+                            dataHTML += '</table>';
+                            dataHTML += '</div>';
+                            
+                            dataHTML += '</div>'; //3rd div
+                            
+                            //post msg
+                            dataHTML += '<div style="float:left; width:100%; padding-top:5px;">';
+                            dataHTML += '<span class="facebook_message">';
+                            dataHTML += resultdata[i].message;
+                            dataHTML += '</span>';
+                            dataHTML += '</div>';
+                            
+                            //if post has pic
+                            dataHTML += '<div class="facebook_picture">';
+                            if(resultdata[i].picture) {
+                            dataHTML += '<div class="facebook_image"><img src="'+resultdata[i].picture+'" /></div>';
+                            } 
+                            dataHTML += '</div>';
+                            
+                            dataHTML += '</div>'; //2nd div
+                            
+                            dataHTML += '<div style="margin:-9px; float:left; width:103.4%; margin-top:15px; border-top:#EEE 1px solid;" id="comments_box_<?php echo $values->id; ?>">';
+                            dataHTML += '<div style="width:98%; padding:10px 0px 10px 20px; border:#000 0px solid;">';
+                            dataHTML += '<div class="cmnt_position">';
+                            var str = resultdata[i].id;
+                            var temp_t1 = str.split('_');
+
+                            var cmnt_img = temp_t1[0];
+
+                            dataHTML += '<img src="https://graph.facebook.com/'+cmnt_img+'/picture?type=square" width="35" height="32" />  &nbsp; </div>';
+                            dataHTML += '<input type="text" name="comment_'+resultdata[i].id+'" id="comment_'+resultdata[i].id+'" placeholder="Post a comment ..." onkeyup="IdentifyMe(event,\''+resultdata[i].id+'\',\''+resultdata[i].acc+'\');" style="width:82%;" />';
+                            dataHTML += '</div>';
+                            dataHTML += '</div>';
+                            
+                            dataHTML += '</div>';
+                            $('#wait').hide();
+                            $('#post_content').append(dataHTML);
+                        }
+			
+		},
+		error : function(response) {
+                    alert('error');
+                    console.log(response);             
+                }
+	});
+      
+});
+
+
 function IdentifyMe(eve,id,access_token)
 {
 
@@ -35,209 +178,25 @@ function CommenttoFB(id,message,accesstoken)
 	});	
 }
 
-</script>
-
-<?php if(count($records)) { 
-     
-    //$w=1;                                
-    foreach($records as $key=>$value)
-    { 
-        if($_REQUEST['page'] != '')
-                $frst_page = $_REQUEST['page'];
-        
-        if($value['page_id'])
-            $frst_page = $value['page_id'];
-
-        $res_fbposts = Cron::model()->CronUserPageToken($frst_page, Yii::app()->user->user_id);
-        
-        //if($w==1)
-        //{
-
-        ?>
-<!--            <input type="hidden" id="current_page" value="<?php //echo $frst_page; ?>" />
-            <input type="hidden" id="current_token" value="<?php //echo $res_fbposts['token']; ?>" />-->
-
-<?php
-
-        //}
-
-        //$w++;
-                   
-     } 
-            		
-}
-
-if($frst_page)
-{
-
-		$fbposts_get = Fbposts::model()->GetPageToekn($frst_page);
+</script>							
 		
-		$feed_content = json_decode(@file_get_contents('https://graph.facebook.com/'.$frst_page.'/feed?access_token='.$fbposts_get[0]['token']));
-		
-		$get_page_name = Fbposts::model()->GetFBPageName($frst_page);
-		$page_name_mine = strtolower($get_page_name[0]['page_name']);
-			
-		$posted_by_me = array();
-		$posted_by_others = array();
-                
-                //var_dump($feed_content); die();
-			
-		if($feed_content)
-		{
-			foreach($feed_content as $key => $value)
-			{
-				foreach($value as $keys=>$values)
-				{	
-					if(!empty($values->message))
-					{
-                                            array_push($posted_by_me,$values);
-						//if($values->from->id == $frst_page)
-							//array_push($posted_by_me,$values);
-						//else
-							//array_push($posted_by_others,$values);
-					}
-				}
-			}
-		}
-							
-		?>
         
 		<div class="tab-content">
         	
             <div class="tab-pane active" id="tab1">
+                <center id="wait"><img src="<?php echo Yii::app()->request->baseUrl; ?>/images/ajax-loader.gif" /></center>
             	
     <span id="post_content">
                 
-<!--                <div class="quick_comment_cntnr" id="add_new_post1" align="center" style="display:none;">
-                    <img src="<?php //echo Yii::app()->request->baseUrl; ?>/images/ajax-loader.gif" />
-                </div>-->
-                <?php
 
-if($posted_by_me)
-{
-    //var_dump('ac'); die();
-    $count = 0;
-	$j = 1;
-	
-	foreach($posted_by_me as $key => $values)
-    {
-            if($count == 10)
-            {
-                break;
-            }
-    	if(!empty($values->message))
-		{ 
-			//$comments_feed = json_decode(@file_get_contents('https://graph.facebook.com/'.$values->id.'/comments?access_token='.$fbposts_get[0]['token'].'&limit=1000'));
-			
-?>
-<div id="div_msg<?php echo $values->id; ?>" class="well well-small post_width" style="float:left;">
-	<div id="div_<?php echo $values->id; ?>" style="display:block; background:#FFF; padding:10px;border-radius:6px ; -moz-border-radius:6px; width:95%; float:left;">
-    
-    <!-- post's details -->
-    <div style="width:100%; border-bottom:#EEE 1px solid; float:left;">
-                        
-        <div style="padding-bottom:10px; width:12%; margin-left:2%; float:left;">
-            <img src="https://graph.facebook.com/<?php echo $frst_page; ?>/picture?type=square" />
-        </div>
-                        
-		<div style="width:76%; float:left;">
-        	<table border="0" cellpadding="0" cellspacing="0" width="100%">
-            <tr>
-                <td class="facebook_pagename"><?php echo $values->from->name; ?></td>
-            </tr>
-            <tr>
-                <td>
-                    <?php 
-                                
-                    if($values->created_time) 
-                    {
-                        $temp_t1 = explode('T',$values->created_time);	
-                        $date_t = $temp_t1[0];
-                                                            
-                        if($temp_t1[1])
-                            $temp_t2 = explode('+',$temp_t1[1]);
-                                                            
-                        $time_t = $temp_t2[0];
-                    }
-                                                        
-                    ?>
-                        <span class="facebook_time">
-                            <?php echo $date_t.' at '.$time_t; ?>
-                            <?php if($values->application->name) echo 'via '.$values->application->name; ?>
-                        </span>
-                </td>
-            </tr>
-            </table>
-		</div>
-     
-    </div>
-                    
-    <!-- post's message -->
-    <div style="float:left; width:100%; padding-top:5px;">
-        <span class="facebook_message">
-            <?php echo $values->message; ?>
-        </span>
-    </div>
-                    
-    <!-- if post has picture in it -->
-    <div class="facebook_picture">
-        <?php if($values->picture) { ?>
-            <div class="facebook_image"><img src="<?php echo $values->picture; ?>" /></div>
-        <?php } ?>
-    </div>
-                    
-    <!-- View all comments div -->
-      
-                    </div>
-                    
-                    <div style="margin:-9px; float:left; width:103.4%; margin-top:15px; border-top:#EEE 1px solid;" id="comments_box_<?php echo $values->id; ?>">
-                        <div style="width:98%; padding:10px 0px 10px 20px; border:#000 0px solid;">
-                            <div class="cmnt_position">
-                            <img src="https://graph.facebook.com/<?php echo $frst_page; ?>/picture?type=square" width="35" height="32" />  &nbsp; </div>
-                            <input type="text" name="comment_<?php echo $values->id; ?>" id="comment_<?php echo $values->id; ?>" placeholder="Post a comment ..." onkeyup="IdentifyMe(event,'<?php echo $values->id; ?>','<?php echo $fbposts_get[0]['token']; ?>');" style="width:82%;" />
-                        </div>
-                    </div>
-                 
-                 </div>
-            
-	<?php
-		}
-                $count++;
-	}
-?>
+<!-- umair-->
+
+
+<!--         umair-->
+
 	<div style="float:left; width:100%;" id="more_data"></div>
-    <?php
-    
-}
-?>
+
                 </div>
               </span>
                 
             </div>
-				
-<!--            <div class="tab-pane" id="tab2">
-            	
-                <span id="post_content_others">
-                
-				<div class="quick_comment_cntnr" id="add_new_post2" align="center" style="display:none;">
-                	<img src="<?php //echo Yii::app()->request->baseUrl; ?>/images/ajax-loader.gif" />
-                </div>
-	                
-				
-                
-                </span>
-                
-			</div>        -->
- 
-<!--    <script>
-    
-    $('#FBTab a').click(function (e) {
-      e.preventDefault();
-      $(this).tab('show');
-    })
-    
-    </script>-->
-    	   
-	<?php }
-?>
-

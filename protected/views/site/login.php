@@ -3,7 +3,7 @@
 
 	<div id="logo"><h1>Cue Cow</h1></div>
 	
-    <div class="span6 login_div">
+    <div class="login_div">
     	<div class="accordion" id="accordion1">
         	<?php $form=$this->beginWidget('CActiveForm', array('htmlOptions'=>array('class'=>'styled'),'enableClientValidation'=>true,'clientOptions'=>array('validateOnSubmit'=>true),)); ?>
             
@@ -46,9 +46,9 @@
                         
                         <div class="field-content-44" style="margin-top:10px;">
                         
-                            <div class="login_field-content-44-left">
+                           <!-- <div class="login_field-content-44-left">
                             	&nbsp;
-                            </div>
+                            </div> -->
                             
                             <div class="login_field-content-44-right left-content-fld no-left-border">
                             	
