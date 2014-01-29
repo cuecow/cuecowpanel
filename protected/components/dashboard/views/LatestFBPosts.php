@@ -1,33 +1,121 @@
 <?php 
 //var_dump($records); die();
 $count = count($records);
-//$page = $records[0]['page_id'];
+$page = $records[0]['page_id'];
 //var_dump($records);
 $user_curr = Yii::app()->user->user_id;
+
 ?>
 <script>
-$(document).ready(function(){
+    
+    var refreshIntervalId;
+    var refreshIntervalId2;
+    var save_posts;
+   // var ids = new Array();
+   // var x = 0;
+    <?php
+    for($i=0;$i<$count;$i++)
+    { ?>
+        
+        //ids[x] = '<?= $records[$i]['page_id']; ?>';
+       // x++;
+        //alert(id);
+    <?php }
+    ?>
+       // alert(ids[0]);
+        //alert(ids[1]);
+        //var page = '<?= $page ?>';
+        //alert(page);
+            //alert(id);
+            
+            
+    $(document).ready(function(){    
+        get_all_page_posts();
+        
+        setInterval(refresh_page_posts, 6000);
+    });
+  
+    function get_all_page_posts()
+    {
+    
+        var ids = new Array();
+        var ids_name = new Array();
+        var x = 0;
+        <?php
+        for($i=0;$i<$count;$i++)
+        { ?>
 
-    //var posts = '<?= $page ?>';
-    var curr_user = '<?= $user_curr ?>';
-    //alert(posts);
-    //alert(curr_user);
-    $.ajax({
-		type : 'POST',
-		url : '<?php echo Yii::app()->request->baseUrl; ?>/ajax/getPosts.php',
-		dataType : 'json',
+            ids[x] = '<?= $records[$i]['page_id']; ?>';
+            ids_name[x] = '<?= $records[$i]['page_name']; ?>';
+            x++;
+            //alert(id);
+        <?php }
+        ?>
+    
+//        if( $("#refreshAll").is(':checked') )
+//        {
+//            //alert('helloooo');
+//            if (refreshIntervalId == undefined)
+//            refreshIntervalId = setInterval(get_fb_posts, 6000);
+//
+//            //alert(refreshIntervalId);
+//        }
+//        else{
+//            window.clearInterval(refreshIntervalId);
+//            refreshIntervalId = undefined;
+//        }
+        
+    
+        for (var k=0;k<ids.length;k++)
+        {
+            $('#p_name').empty();
+            var pagem = 'Loading Posts from '+ids_name[k];
+            $('#p_name').append(pagem);
+            $('#wait').show();
+            
+            var page_id = ids[k];
+    
+            load_page_posts(page_id);
+        }
+    }
+    
+    
+    function load_page_posts(page_id) {
+        //var posts = '<?= $page ?>';
+        var curr_user = '<?= $user_curr ?>';
+        //alert(posts);
+        //alert(curr_user);
+        $.ajax({
+            type : 'POST',
+            url : '<?php echo Yii::app()->request->baseUrl; ?>/ajax/getPosts.php',
+            dataType : 'json',
 
-                //data: 'records='+ posts + '&user='+ curr_user,
-                data: 'user='+ curr_user,
-		success : function(response){
-                    //alert('result');
-                    console.log(response);
-                    
-                    resultdata = response['result'];
-                    ids = response['pages_id'];
-                    console.log(resultdata[0].acc);
-                    
-                    //alert(resultdata[0].to.data[0].name);
+            data: 'page_id='+ page_id + '&user='+ curr_user,
+            //data: 'user='+ curr_user,
+            success : function(response){
+                //alert('result');
+                console.log(response);
+
+                var resultdata = response['result'];
+                console.log(resultdata);
+                //save_posts = resultdata;
+                //console.log(save_posts);
+                var ids = response['pages_id'];
+                //console.log(resultdata[0].acc);
+
+                render_posts(resultdata);			
+            },
+            error : function(response) {
+                //alert('error');
+                console.log(response);             
+            }
+        });
+    }
+
+      
+    function render_posts(resultdata)
+{
+    $('#post_content').empty();
                     for(var i=0;i<11;i++)
                         {
                             dataHTML = '<div id="div_msg'+resultdata[i].id+'" class="well well-small post_width" style="float:left;">';
@@ -123,25 +211,138 @@ $(document).ready(function(){
                             var cmnt_img = temp_t1[0];
 
                             dataHTML += '<img src="https://graph.facebook.com/'+cmnt_img+'/picture?type=square" width="35" height="32" />  &nbsp; </div>';
-                            dataHTML += '<input type="text" name="comment_'+resultdata[i].id+'" id="comment_'+resultdata[i].id+'" placeholder="Post a comment ..." onkeyup="IdentifyMe(event,\''+resultdata[i].id+'\',\''+resultdata[i].acc+'\');" style="width:82%;" />';
+                            dataHTML += '<input type="text" name="comment_'+resultdata[i].id+'" id="comment_'+resultdata[i].id+'" placeholder="Post a comment ..." onkeyup="IdentifyMe(event,\''+resultdata[i].id+'\',\''+resultdata[i].acc+'\');" class="post-field-text" />';
                             dataHTML += '</div>';
                             dataHTML += '</div>';
                             
                             dataHTML += '</div>';
                             $('#wait').hide();
+                            $('#p_name').empty();
                             $('#post_content').append(dataHTML);
                         }
+}
+
+
+function refresh_page_posts()
+{
+    var als = new Array();
+    var allVals;
+//    if($(".chkbx").is(':checked'))
+//    {
+        allVals = $("input[type=checkbox]:checked").map(
+                            function () { return this.value; }
+                        ).get();
+     
+        allVals = allVals.toString();        
+        als = allVals.split(',');
+//    }
+
+        $('#c_b input[type=checkbox]:checked').each(function() {
+            console.log($(this).val());
+            console.log($(this).attr("name"));
+            
+            $('#p_name').empty();
+            var pagem = 'Loading Posts from '+$(this).attr("name");
+            $('#p_name').append(pagem);
+            $('#wait').show();
+            //allVals.push($(this).val());
+            load_page_posts($(this).val());
+        });
+     
+//    if($("input[name=chkbx]:checked"))
+//    {
+//        
+//        var allVals = $("input[name=chkbx]:checked").map(
+//     function () {return this.value;}).get();
+//     
+//    allVals = allVals.toString();
+//    als = allVals.split(',');
+//            
+//        if (refreshIntervalId == undefined)
+//        refreshIntervalId = setInterval(get_fb_posts, 6000);
+//    
+//        //alert(refreshIntervalId);
+//    }
+//    else{
+//        window.clearInterval(refreshIntervalId);
+//        refreshIntervalId = undefined;
+//    }
+     
+//        for (var k=0;k<als.length;k++)
+//        {
+//            //alert(als[k]);
+//            //$('#wait').show();
+//            //console.log(als[k]);
+//            var page_id = als[k];                
+//            //load_page_posts(page_id);
+//        }
+}
+
+function update(page,name)
+{
+    alert(name);
+    //alert(page);
+ //setInterval(update, 6000);
+//    $("#choose").change(function()
+//    {
+//        var id=$(this).val();
+//
+//        alert(id);
+//
+//    });
+//console.log(save_posts);
+    //var page = $('#choose').find(":selected").val();
+    //alert(conceptName);
+    $('#p_name').empty();
+        var pagem = 'Loading Posts from ';
+        $('#p_name').append(pagem);
+        $('#wait').show();
+        
+
+    var curr_user = '<?= $user_curr ?>';
+    //alert(posts);
+    //alert(curr_user);
+    //var poo = JSON.stringify(save_posts);
+    $.ajax({
+		type : 'POST',
+		url : '<?php echo Yii::app()->request->baseUrl; ?>/ajax/getPosts.php',
+		dataType : 'json',
+
+                //data: 'records='+ posts + '&user='+ curr_user,
+                //data: 'user='+ curr_user + '&page_id='+ page + '&old_post='+ save_posts,
+                data: 'user='+ curr_user + '&page_id='+ page,
+		success : function(response){
+                    alert('ssss');
+                    //alert('result');
+                    //console.log(response);
+                    
+                    resultdata = response['result'];
+                    render_posts(resultdata);
+                    save_posts = resultdata;
+                    ids = response['pages_id'];
+                    //console.log(resultdata[0].acc);
+                    render_posts(resultdata);
+                    //alert(resultdata[0].to.data[0].name);
 			
 		},
 		error : function(response) {
-                    alert('error');
+                    //alert('error');
                     console.log(response);             
                 }
 	});
-      
-});
+}
 
-
+//function chk()
+//{
+//    if($("#refresh").is(':checked'))
+//    {
+//        alert('aaaffff');
+//    }
+//    else
+//        alert('nootttt');
+//      // checked
+//    //console.log(save_posts);
+//}
 function IdentifyMe(eve,id,access_token)
 {
 
@@ -184,7 +385,7 @@ function CommenttoFB(id,message,accesstoken)
 		<div class="tab-content">
         	
             <div class="tab-pane active" id="tab1">
-                <center id="wait"><img src="<?php echo Yii::app()->request->baseUrl; ?>/images/ajax-loader.gif" /></center>
+                <center id="wait"><p id="p_name"></p> <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/ajax-loader.gif" /></center>
             	
     <span id="post_content">
                 
@@ -200,3 +401,32 @@ function CommenttoFB(id,message,accesstoken)
               </span>
                 
             </div>
+            
+<!--<input type="button" value="check posts's array" onclick="chk();"/>-->
+<select onchange="update();" id="choose">
+<?php
+foreach($records as $key=>$value)
+{ ?>
+    <option value="<?php echo $value['page_id']; ?>"><?php echo $value['page_name'] ?> </option>
+    
+<?php }
+?>
+</select>
+
+<p>
+    AutoRefresh
+</p>
+
+<select onchange="update();" id="choose1">
+<?php
+foreach($records as $key=>$value)
+{ ?>
+    <option value="<?php echo $value['page_id']; ?>"><?php echo $value['page_name'] ?> </option>
+    
+<?php }
+?>
+</select>
+
+<!--<input type="button" value="Time start" onclick="time();"/>-->
+<p id="demo"></p>
+<!--<input type="checkbox" id="refresh" value="refresh" onclick="get_fb_posts();">All refresh-->

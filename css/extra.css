@@ -154,6 +154,10 @@ div.datainsert { margin-bottom: 10px; font-size: 11px;}
 
 .mendatory_red{ color:#FF0000; }
 
+.post-field-text {
+width:85%;
+}
+
 @media (min-width: 320px) and (max-width: 480px) {
     .login_field-content-44-right {
         float: none;
@@ -163,4 +167,133 @@ div.datainsert { margin-bottom: 10px; font-size: 11px;}
     .left-content-fld {
         width: 104% !important;
     }
+    
+    .refresh-post-content {
+        width: 390px !important;
+    }
+}
+
+@media (min-width: 320px) and (max-width: 640px) {
+.post_width {
+    width: 89% !important;
+    padding-right: 15px;
+}
+
+.facebook_pagename {
+	padding-left: 10px;
+}
+
+.cmnt_position {
+margin-bottom: 10px;
+}
+
+.facebook_time {
+padding-left:10px;
+}
+
+.post-field-text {
+width:74%;
+}
+
+}
+
+
+
+.refreshpost-hover {
+	float:right;
+	position:relative;
+	cursor:pointer;
+        margin: -36px 0px 0 0 ;
+        padding: 10px 13px 6px 11px;
+}
+
+.refreshpost-hover:hover {
+    background: #f2f2f2;
+}
+
+
+.refresh-post-content a:after {
+	display:block;
+	content:"";
+	clear:both;
+}
+
+.main-container {
+	width:860px;
+	margin:0px auto;
+}
+
+.refresh-post-content {
+	background: none repeat scroll 0 0 #F2f2f2;
+        box-shadow: 0 4px 5px -1px #CCCCCC;
+	-webkit-box-shadow: 0 4px 5px -1px #CCCCCC;
+	-moz-box-shadow: 0 4px 5px -1px #CCCCCC;
+	-o-box-shadow: 0 4px 5px -1px #CCCCCC;
+     
+        list-style: none outside none;
+        margin: 0;
+        
+        padding: 10px;
+     top: 30px;
+    width: 440px;
+    z-index: 999;
+	border:1px solid #eee;
+        cursor: default;
+        border-radius: 5px 0 5px 5px;
+        -moz-border-radius: 5px 0 5px 5px;
+        -webkit-border-radius: 5px 0 5px 5px;
+        -o-border-radius: 5px 0 5px 5px;
+	
+}
+
+.refresh-post-overlay {
+	margin-top:-19px;
+	position:absolute;
+	right:0px;
+	display:none;
+	padding-top:25px;
+        z-index: 99;
+}
+
+.refreshpost-hover:hover .refresh-post-overlay {
+	display:block;
+}
+/* --------- */
+.refresh-post-title {
+    padding-bottom: 2px !important;
+}
+
+
+.fanpage-link-cnt {
+    float: left;
+    width: 65%;
+    margin-left: 10px;
+}
+
+.refresh-page-link {
+	float:right;
+}
+
+.refresh-post-checkbox {
+	float:left;
+}
+
+.refresh-page-link {
+    margin-right: 10px;
+}
+
+.refresh-post-row {
+	margin-bottom:10px;
+	border-bottom:1px dotted #ccc;
+	padding-bottom:5px;
+}
+
+.refresh-allcnt {
+    float: left;
+    padding-left: 10px;
+}
+
+.refresh-post-overflow {
+    max-height: 190px;
+    overflow: auto;
 }
