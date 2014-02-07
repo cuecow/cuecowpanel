@@ -1,4 +1,4 @@
-<h5><?php echo getContent('user.campaign.overview',Yii::app()->session['language']); ?><div style="float:right;"><a href="<?php echo Yii::app()->request->baseUrl?>/index.php/user/newcampaign" class="button large green"><button class="btn btn-info btn-large" type="button"><?php echo getContent('user.campaign.startcamp',Yii::app()->session['language']); ?></button></a></div></h5>
+<h5><?php echo getContent('user.campaign.overview',Yii::app()->session['language']); ?><div style="float:right;" class="compgn-btn"><a href="<?php echo Yii::app()->request->baseUrl?>/index.php/user/newcampaign" class="button large green"><button class="btn btn-info btn-large" type="button"><?php echo getContent('user.campaign.startcamp',Yii::app()->session['language']); ?></button></a></div></h5>
             	
 <?php if($_REQUEST['msg'] == 'maxerr') { ?>
 <div class="alert alert-error">
@@ -34,37 +34,35 @@ $PastCampaign 	= $model->GetArchivedCampaigns();
                     
     <?php if (count($ActiveCampaign)) { ?>
                     
-    <table class="table table-striped">
-    <thead> 
-	<tr> 
-		<th>
+    <div class="table table-striped checkdiv table-cmpn-one"> 
+	<div class="row-fluid" style="border-bottom:1px solid #ccc; padding: 10px 0;"> 
+		<div class="span1 cell01">
         	<strong><?php echo getContent('user.campaign.sn',Yii::app()->session['language']); ?></strong>
-        </th>
-        <th>
+        </div>
+        <div class="span1 cell02">
         	<strong><?php echo getContent('user.campaign.location',Yii::app()->session['language']); ?></strong>
-        </th> 
-        <th>
+        </div> 
+        <div class="span2 cell03">
         	<strong><?php echo getContent('user.campaign.sdateenddate',Yii::app()->session['language']); ?></strong>
-        </th> 
-        <th>
+        </div> 
+        <div class="span2 cell04">
         	<strong><?php echo getContent('user.campaign.kpi',Yii::app()->session['language']); ?></strong>
-        </th> 
-        <th>
+        </div> 
+        <div class="span1 cell05">
         	<strong><?php echo getContent('user.campaign.timezone',Yii::app()->session['language']); ?></strong>
-        </th> 
-        <th>
+        </div> 
+        <div class="span2 cell06">
         	<strong><?php echo getContent('user.campaign.selsocialchannel',Yii::app()->session['language']); ?></strong>
-        </th>
-        <th><strong><?php echo getContent('user.campaign.options',Yii::app()->session['language']); ?></strong></th>
-        <th><strong>Media Status</strong></th>
-    </tr> 
-    </thead> 
-    <tbody> 
+        </div>
+        <div class="span2 cell07"><strong><?php echo getContent('user.campaign.options',Yii::app()->session['language']); ?></strong></div>
+        <div class="span1"><strong>Media Status</strong></div>
+    </div> 
+        </div>
         
 	<?php 
                     
     $s=1; 
-    
+    $flag=0;
 	foreach($ActiveCampaign as $key=>$value)
     { 
     	if(!empty($value['fb_posts']))
@@ -114,18 +112,28 @@ $PastCampaign 	= $model->GetArchivedCampaigns();
                             
                     
 	?>
-	<tr> 
-		<td align="center"><?php echo $s; ?></td>
-        <td><a href="<?php echo Yii::app()->request->baseUrl; ?>/index.php/user/campaign/view/see/id/<?php echo $value['campaign_id']; ?>"><?php echo $value['name']; ?></a></td> 
-        <td align="center"><?php echo date('m/d/Y',$value['start_date']); ?> <?php if($value['start_time']) echo '@ '.$value['start_time']; ?> - <?php echo date('m/d/Y',$value['end_date']); ?> <?php if($value['end_time']) echo '@ '.$value['end_time']; ?></td> 
-        <td align="center"><?php echo $value['kpi']; ?></td> 
-        <td align="center"><?php echo $timezone_set; ?></td> 
-        <td align="left"><?php echo $channels; ?></td>
-        <td align="center">                    
+            <?php
+            
+                if($flag%2 == 0){ ?>
+            
+                    <div class="row-fluid bg-clr-gray" style="border-bottom:1px solid #ccc; padding: 10px 0;">
+              <?php  }
+              else{ ?>
+                  <div class="row-fluid" style="border-bottom:1px solid #ccc; padding: 10px 0;">
+              <?php }
+?>
+	
+	<div class="span1"><?php echo $s; ?></div>
+        <div class="span2"><a href="<?php echo Yii::app()->request->baseUrl; ?>/index.php/user/campaign/view/see/id/<?php echo $value['campaign_id']; ?>"><?php echo $value['name']; ?></a></div> 
+        <div class="span2"><?php echo date('m/d/Y',$value['start_date']); ?> <?php if($value['start_time']) echo '@ '.$value['start_time']; ?> - <?php echo date('m/d/Y',$value['end_date']); ?> <?php if($value['end_time']) echo '@ '.$value['end_time']; ?></div> 
+        <div class="span1"><?php echo $value['kpi']; ?></div> 
+        <div class="span2"><?php echo $timezone_set; ?></div> 
+        <div class="span3"><?php echo $channels; ?></div>
+        <div class="span1">                    
             <a class="icon-button edit" href="<?php echo Yii::app()->request->baseUrl; ?>/index.php/user/newcampaign/camp/<?php echo $value['campaign_id']; ?>" title="Edit Campaign"><i class="icon-edit"></i></a>
             <a class="icon-button delete" href="javascript:confirmSubmit('<?php echo Yii::app()->request->baseUrl; ?>/index.php/user/campaign/id/<?php echo $value['campaign_id']; ?>/act/del');" title="Delete Campaign"><i class="icon-trash"></i></a>
-		</td>
-        <td align="center">
+		</div>
+        <div class="span1">
             <?php if( $value['foursquare_specials']=='yes' ) { if($fs_special_detail['current_status'] == 'running') { ?>
             	<img src="<?php echo Yii::app()->request->baseUrl; ?>/images/foursquare.png" title="running media" />
 			<?php } else { ?>
@@ -138,18 +146,19 @@ $PastCampaign 	= $model->GetArchivedCampaigns();
                 <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/facebook_gray.png" title="retired media" />
             <?php } } ?>
             
-		</td>
-	</tr>
+		</div>
+	</div>
 	
 	<?php 
                     
     	$s++; 
+        $flag++;
 	} 
                     
     ?>
                     
 	</tbody> 
-    </table>
+    </div>
                     
     <?php } else { ?>
             
@@ -159,31 +168,29 @@ $PastCampaign 	= $model->GetArchivedCampaigns();
             
     <?php } ?>
                 
-	</div>
+	
+ </div>
         
 	<!-- TAB TWO -->
     <div class="tab-pane" id="tab2">
                     
 		<?php if (count($FutureCampaign)) { ?>
                     
-		<table class="table table-striped">
-        <thead> 
-        <tr> 
-        	<th><strong><?php echo getContent('user.campaign.sn',Yii::app()->session['language']); ?></strong></th>
-            <th><strong><?php echo getContent('user.campaign.location',Yii::app()->session['language']); ?></strong></th> 
-            <th><strong><?php echo getContent('user.campaign.sdateenddate',Yii::app()->session['language']); ?></strong></th> 
-            <th><strong><?php echo getContent('user.campaign.kpi',Yii::app()->session['language']); ?></strong></th> 
-            <th><strong><?php echo getContent('user.campaign.timezone',Yii::app()->session['language']); ?></strong></th> 
-            <th><strong><?php echo getContent('user.campaign.selsocialchannel',Yii::app()->session['language']); ?></strong></th>
-            <th><strong><?php echo getContent('user.campaign.options',Yii::app()->session['language']); ?></strong></th>
-		</tr> 
-        </thead> 
-        <tbody> 
-                    
+		<div class="table table-striped checkdiv">
+                    <div class="row-fluid" style="border-bottom:1px solid #ccc; padding: 10px 0;">
+            <div class="span1 cell01"><strong><?php echo getContent('user.campaign.sn',Yii::app()->session['language']); ?></strong></div>
+            <div class="span2 cell02"><strong><?php echo getContent('user.campaign.location',Yii::app()->session['language']); ?></strong></div> 
+            <div class="span2 cell03"><strong><?php echo getContent('user.campaign.sdateenddate',Yii::app()->session['language']); ?></strong></div>
+            <div class="span1 cell04"><strong><?php echo getContent('user.campaign.kpi',Yii::app()->session['language']); ?></strong></div>
+            <div class="span2 cell05"><strong><?php echo getContent('user.campaign.timezone',Yii::app()->session['language']); ?></strong></div>
+            <div class="span3 cell06"><strong><?php echo getContent('user.campaign.selsocialchannel',Yii::app()->session['language']); ?></strong></div>
+            <div class="span1 cell07"><strong><?php echo getContent('user.campaign.options',Yii::app()->session['language']); ?></strong></div>
+                    </div>   
 		<?php 
         
 		$value = '';
 		$s = 1; 
+                $flag = 0;
 		
 		foreach($FutureCampaign as $key=>$value)
         { 
@@ -226,28 +233,39 @@ $PastCampaign 	= $model->GetArchivedCampaigns();
 				$timezone_set = '--';
 		
 		?>
-		<tr> 
-			<td align="center"><?php echo $s; ?></td> 
-            <td><a href="<?php echo Yii::app()->request->baseUrl; ?>/index.php/user/campaign/view/see/id/<?php echo $value['campaign_id']; ?>"><?php echo $value['name']; ?></a></td> 
-            <td align="center"><?php echo date('m/d/Y',$value['start_date']); ?> <?php if($value['start_time']) echo '@ '.$value['start_time']; ?> - <?php echo date('m/d/Y',$value['end_date']); ?> <?php if($value['end_time']) echo '@ '.$value['end_time']; ?> </td> 
-			<td align="center"><?php echo $value['kpi']; ?></td> 
-            <td align="center"><?php echo $timezone_set; ?></td>
-            <td align="left"><?php echo $channels; ?></td>
-            <td align="center">                    
+                    <?php
+            
+                if($flag%2 == 0){ ?>
+            
+                    <div class="row-fluid bg-clr-gray" style="border-bottom:1px solid #ccc; padding: 10px 0;">
+              <?php  }
+              else{ ?>
+                  <div class="row-fluid" style="border-bottom:1px solid #ccc; padding: 10px 0;">
+              <?php }
+?>
+
+            <div class="span1"><?php echo $s; ?></div> 
+            <div class="span2"><a href="<?php echo Yii::app()->request->baseUrl; ?>/index.php/user/campaign/view/see/id/<?php echo $value['campaign_id']; ?>"><?php echo $value['name']; ?></a></div> 
+            <div class="span2"><?php echo date('m/d/Y',$value['start_date']); ?> <?php if($value['start_time']) echo '@ '.$value['start_time']; ?> - <?php echo date('m/d/Y',$value['end_date']); ?> <?php if($value['end_time']) echo '@ '.$value['end_time']; ?> </div> 
+            <div class="span1"><?php echo $value['kpi']; ?></div> 
+            <div class="span2"><?php echo $timezone_set; ?></div>
+            <div class="span3"><?php echo $channels; ?></div>
+            <div class="span1">                    
             	<a class="icon-button edit" href="<?php echo Yii::app()->request->baseUrl; ?>/index.php/user/newcampaign/camp/<?php echo $value['campaign_id']; ?>" title="Edit Campaign"><i class="icon-edit"></i></a>
                 <a class="icon-button delete" href="javascript:confirmSubmit('<?php echo Yii::app()->request->baseUrl; ?>/index.php/user/campaign/id/<?php echo $value['campaign_id']; ?>/act/del');" title="Delete Campaign"><i class="icon-trash"></i></a>
-			</td>
-		</tr>
+			</div>
+		</div>
         
 		<?php 
                     
-        	$s++; 
+        	$s++;
+                $flag++;
                     
 		} 
                     
         ?>
-        </tbody> 
-		</table>
+         
+		</div>
             
 	<?php } else { ?>
         
@@ -258,30 +276,30 @@ $PastCampaign 	= $model->GetArchivedCampaigns();
 	<?php } ?>
                 
 	</div>
+        
                 
 	<!-- TAB THREE -->
     <div class="tab-pane" id="tab3">
                     
 		<?php if (count($PastCampaign)) { ?>
         
-        <table class="table table-striped">
-        <thead> 
-        <tr> 
-        	<th><strong><?php echo getContent('user.campaign.sn',Yii::app()->session['language']); ?></strong></th>
-            <th><strong><?php echo getContent('user.campaign.location',Yii::app()->session['language']); ?></strong></th> 
-            <th><strong><?php echo getContent('user.campaign.sdateenddate',Yii::app()->session['language']); ?></strong></th> 
-            <th><strong><?php echo getContent('user.campaign.kpi',Yii::app()->session['language']); ?></strong></th> 
-            <th><strong><?php echo getContent('user.campaign.timezone',Yii::app()->session['language']); ?></strong></th> 
-            <th><strong><?php echo getContent('user.campaign.selsocialchannel',Yii::app()->session['language']); ?></strong></th>
-            <th><strong><?php echo getContent('user.campaign.options',Yii::app()->session['language']); ?></strong></th>
-		</tr> 
-        </thead> 
-        <tbody> 
+        <div class="table table-striped checkdiv">
+            <div class="row-fluid" style="border-bottom:1px solid #ccc; padding: 10px 0;">
+            <div class="span1 cell01"><strong><?php echo getContent('user.campaign.sn',Yii::app()->session['language']); ?></strong></div>
+            <div class="span2 cell02"><strong><?php echo getContent('user.campaign.location',Yii::app()->session['language']); ?></strong></div> 
+            <div class="span2 cell03"><strong><?php echo getContent('user.campaign.sdateenddate',Yii::app()->session['language']); ?></strong></div> 
+            <div class="span1 cell04"><strong><?php echo getContent('user.campaign.kpi',Yii::app()->session['language']); ?></strong></div> 
+            <div class="span2 cell05"><strong><?php echo getContent('user.campaign.timezone',Yii::app()->session['language']); ?></strong></div> 
+            <div class="span3 cell06"><strong><?php echo getContent('user.campaign.selsocialchannel',Yii::app()->session['language']); ?></strong></div>
+            <div class="span1 cell07"><strong><?php echo getContent('user.campaign.options',Yii::app()->session['language']); ?></strong></div>
+	    </div>
+        
           
 		<?php 
           
         $value = '';
         $s = 1; 
+        $flag = 0;
           
 		foreach($PastCampaign as $key=>$value)
         { 
@@ -331,24 +349,34 @@ $PastCampaign 	= $model->GetArchivedCampaigns();
 				$timezone_set = '--';
               
 		?>
-		
-        <tr> 
-			<td align="center"><?php echo $s; ?></td> 
-            <td><a href="<?php echo Yii::app()->request->baseUrl; ?>/index.php/user/campaign/view/see/id/<?php echo $value['campaign_id']; ?>"><?php echo $value['name']; ?></a></td> 
-            <td align="center"><?php echo date('m/d/Y',$value['start_date']); ?> <?php if($value['start_time']) echo '@ '.$value['start_time']; ?> - <?php echo date('m/d/Y',$value['end_date']); ?> <?php if($value['end_time']) echo '@ '.$value['end_time']; ?></td> 
-            <td align="center"><?php echo $value['kpi']; ?></td> 
-            <td align="center"><?php echo $timezone_set; ?></td> 
-            <td align="left"><?php echo $channels; ?></td>
-            <td align="center">                    
+            <?php
+            
+                if($flag%2 == 0){ ?>
+            
+                    <div class="row-fluid bg-clr-gray" style="border-bottom:1px solid #ccc; padding: 10px 0;">
+              <?php  }
+              else{ ?>
+                  <div class="row-fluid" style="border-bottom:1px solid #ccc; padding: 10px 0;">
+              <?php }
+?>
+            
+	    <div class="span1 cell01"><?php echo $s; ?></div> 
+            <div class="span2 cell02"><a href="<?php echo Yii::app()->request->baseUrl; ?>/index.php/user/campaign/view/see/id/<?php echo $value['campaign_id']; ?>"><?php echo $value['name']; ?></a></div> 
+            <div class="span2 cell03"><?php echo date('m/d/Y',$value['start_date']); ?> <?php if($value['start_time']) echo '@ '.$value['start_time']; ?> - <?php echo date('m/d/Y',$value['end_date']); ?> <?php if($value['end_time']) echo '@ '.$value['end_time']; ?></div> 
+            <div class="span1 cell04"><?php echo $value['kpi']; ?></div> 
+            <div class="span2 cell05"><?php echo $timezone_set; ?></div> 
+            <div class="span3 cell06"><?php echo $channels; ?></div>
+            <div class="span1 cell07">                    
                 <a class="icon-button edit" href="<?php echo Yii::app()->request->baseUrl; ?>/index.php/user/newcampaign/camp/<?php echo $value['campaign_id']; ?>" title="Edit Campaign"><i class="icon-edit"></i></a>
                 <a class="icon-button delete" href="javascript:confirmSubmit('<?php echo Yii::app()->request->baseUrl; ?>/index.php/user/campaign/id/<?php echo $value['campaign_id']; ?>/act/del');" title="Delete Campaign"><i class="icon-trash"></i></a>
-			</td>
-		</tr>
+			</div>
+		</div>
               
-          <?php $s++; } ?>
+          <?php 
+          $flag++;
+          $s++; } ?>
           
-          </tbody> 
-          </table>
+          </div>
   
           <?php } else { ?>
           

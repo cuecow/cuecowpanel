@@ -109,7 +109,7 @@ function GetUrlVals(value,e)
 	<div class="field-content-44">
         <div class="login_field-content-44-left"><label><?php echo getContent('user.newcampaign.selwall',Yii::app()->session['language']); ?></label></div>
         <div class="field-content-44-right left-content-fld">
-            <select style="height:40px; padding:10px; outline:none; width:350px;" name="sel_wall" id="sel_wall" onchange="LoadFBWall(this.value,<?php echo Yii::app()->user->user_id; ?>);">
+            <select style="height:40px; padding:10px; outline:none; width:350px;" class="sel-wall-fb" name="sel_wall" id="sel_wall" onchange="LoadFBWall(this.value,<?php echo Yii::app()->user->user_id; ?>);">
                 <option value="0">Select</option>
                 <option value="1">Single Wall</option>
                 <option value="2">Group of Wall</option>
@@ -139,7 +139,7 @@ function GetUrlVals(value,e)
     <div class="field-content-44">
         <div class="login_field-content-44-left"><label><?php echo getContent('user.newcampaign.entermessage',Yii::app()->session['language']); ?></label></div>
         <div class="field-content-44-right left-content-fld">
-            <textarea name="textmsg" id="textmsg" style="width:610px; height:100px;" onkeypress="GetUrlVals(this.value,event);"><?php echo stripslashes($PendingFBPost[0]['message']) ?></textarea>
+            <textarea name="textmsg" class="sel-textarea-fb" id="textmsg" style="width:610px; height:100px;" onkeypress="GetUrlVals(this.value,event);"><?php echo stripslashes($PendingFBPost[0]['message']) ?></textarea>
         </div>
     </div>
     <div class="clearfix"></div>

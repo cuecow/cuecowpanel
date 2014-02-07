@@ -280,7 +280,7 @@ function refresh_page_posts()
 
 function update(page,name)
 {
-    alert(name);
+    //alert(name);
     //alert(page);
  //setInterval(update, 6000);
 //    $("#choose").change(function()
@@ -402,31 +402,4 @@ function CommenttoFB(id,message,accesstoken)
                 
             </div>
             
-<!--<input type="button" value="check posts's array" onclick="chk();"/>-->
-<select onchange="update();" id="choose">
-<?php
-foreach($records as $key=>$value)
-{ ?>
-    <option value="<?php echo $value['page_id']; ?>"><?php echo $value['page_name'] ?> </option>
-    
-<?php }
-?>
-</select>
-
-<p>
-    AutoRefresh
-</p>
-
-<select onchange="update();" id="choose1">
-<?php
-foreach($records as $key=>$value)
-{ ?>
-    <option value="<?php echo $value['page_id']; ?>"><?php echo $value['page_name'] ?> </option>
-    
-<?php }
-?>
-</select>
-
-<!--<input type="button" value="Time start" onclick="time();"/>-->
-<p id="demo"></p>
-<!--<input type="checkbox" id="refresh" value="refresh" onclick="get_fb_posts();">All refresh-->
+<!-- <input type="button" value="check posts's array" onclick="chk();"/> -->

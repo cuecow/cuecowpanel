@@ -14,12 +14,12 @@
 <div class="clear"></div>
 <div class="clearfix"></div>
 
-<div class="span6" style="width:900px;">
+<div class="span8">
 
 	<?php if(empty($_REQUEST['group_id'])) { ?>
     
     <div class="field-content-44">
-        <div class="login_field-content-44-left"><label><?php echo getContent('user.location.addgroup.label1',Yii::app()->session['language']); ?>:</label></div>
+        <div class="login_field-content-44-left add-venue-label"><label><?php echo getContent('user.location.addgroup.label1',Yii::app()->session['language']); ?>:</label></div>
         <div class="login_field-content-44-right left-content-fld">
             <?php echo $form->textField($model_group,'name',array('style'=>'width:300px;')); ?>
         </div>
@@ -31,7 +31,7 @@
     	
         <b><?php echo getContent('user.location.addgroup.label2',Yii::app()->session['language']); ?></b><br />
         
-        <select name="itemsToChoose[]" id="left" multiple="multiple" style="padding:10px; outline:none; width:300px; height:200px;">
+        <select class="chooseitem-box" name="itemsToChoose[]" id="left" multiple="multiple" style="padding:10px; outline:none; width:300px; height:200px;">
 			<?php if(count($all_venues)) { ?>    
                 <?php foreach($all_venues as $key=>$value) { ?>
                 <option value="loc_<?php echo $value['loc_id']; ?>"><?php echo $value['name']; ?></option>
@@ -47,16 +47,16 @@
         </select>
 	</div>
     
-	<div style="float:left; padding-left:20px; padding-top:50px;" class="low">
-        <center>
+	<div style="float:left; padding-left:20px; padding-top:50px;" class="low btn-cnt-one">
+        <div class="btn-info-venue">
             <input name="left2right" value="add" type="button" class="btn btn-info"> <br /> <br />
             <input name="right2left" value="remove" type="button" class="btn btn-info">  
-        </center>
+        </div>
     </div>
                               
-    <div style="float:left; padding-left:20px;">
+    <div class="ingroup-cnt-field" style="float:left; padding-left:20px;">
         <b><?php echo getContent('user.location.addgroup.label3',Yii::app()->session['language']); ?></b><br />
-        <select name="itemsToAdd[]" id="right" multiple="multiple" style="padding:10px; outline:none; width:300px; height:200px;">
+        <select class="chooseitem-box" name="itemsToAdd[]" id="right" multiple="multiple" style="padding:10px; outline:none; width:300px; height:200px;">
         </select>
     </div>
                           

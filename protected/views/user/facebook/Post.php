@@ -134,7 +134,7 @@ if($frst_page)
                 
                 <fieldset>
                 
-                	<img src="https://graph.facebook.com/<?php echo $frst_page; ?>/picture?type=square" width="35" height="32" /> &nbsp; <input type="text" id="quickcomment1" placeholder="Enter new Post ..." style="width:85%;" />
+                	<img src="https://graph.facebook.com/<?php echo $frst_page; ?>/picture?type=square" width="35" height="32" /> &nbsp; <input type="text" class="fb-comment-field-style" id="quickcomment1" placeholder="Enter new Post ..." style="width:85%;" />
                     
                     <div class="clearfix"></div>
                     
@@ -165,7 +165,7 @@ if($frst_page)
                 
                     <fieldset>
                     
-                        <img src="https://graph.facebook.com/<?php echo $frst_page; ?>/picture?type=square" width="35" height="32" /> &nbsp; <input type="text" id="quickcomment2" placeholder="Enter new Post ..." style="width:85%;" />
+                        <img src="https://graph.facebook.com/<?php echo $frst_page; ?>/picture?type=square" width="35" height="32" /> &nbsp; <input type="text" id="quickcomment2" class="fb-comment-field-style" placeholder="Enter new Post ..." style="width:85%;" />
                         
                         <div class="clearfix"></div>
                         

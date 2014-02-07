@@ -42,11 +42,13 @@ $checkin_total = 0;
 //var_dump(count($location_sorted)); die();
 //var_dump($location_sorted); die();
 
+if($location_sorted != null){
 foreach($location_sorted as $key=>$value)
 {
     //var_dump($value['fblikes']);
     $fblikes_total = $fblikes_total + $value['fblikes'];
     $checkin_total = $checkin_total + $value['tot_checkin'];
+}
 }
 
 //$fblikes_total = ($location_sorted[0]['fblikes']+$location_sorted[1]['fblikes']+$location_sorted[2]['fblikes']+$location_sorted[3]['fblikes']+$location_sorted[4]['fblikes']);

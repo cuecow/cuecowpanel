@@ -20,14 +20,14 @@ if($posted_by_me)
 			$comments_feed = json_decode(@file_get_contents('https://graph.facebook.com/'.$values->id.'/comments?access_token='.$fbposts_get[0]['token'].'&limit=1000'));
 			
 ?>
-<div id="div_msg<?php echo $values->id; ?>" class="well well-small" style="float:left;">
+<div id="div_msg<?php echo $values->id; ?>" class="well well-small fb-commentbox-cnt" style="float:left; width: 96%;">
 	<div id="div_<?php echo $values->id; ?>" style="display:block; background:#FFF; padding:10px;border-radius:6px ; -moz-border-radius:6px; width:95%; float:left;">
     
     <!-- post's details -->
     <div style="width:100%; border-bottom:#EEE 1px solid; float:left;">
                         
         <div style="padding-bottom:10px; width:12%; margin-left:2%; float:left;">
-            <img src="https://graph.facebook.com/<?php echo $frst_page; ?>/picture?type=square" />
+            <img src="https://graph.facebook.com/<?php echo $values->from->id; ?>/picture?type=square" />
         </div>
                         
 		<div style="width:76%; float:left;">
@@ -182,7 +182,7 @@ if($posted_by_me)
             </div>
                         
             <!-- Short Comment div -->
-            <div id="short_comments_<?php echo $values->id; ?>" style="padding:5px; width:450px; margin-left:20px;">
+            <div id="short_comments_<?php echo $values->id; ?>" class="comment-fb-box-outer" style="padding:5px; width:450px; margin-left:20px;">
                 <table style="margin:0px; padding:0px;">
 				<?php
                     
@@ -199,9 +199,9 @@ if($posted_by_me)
                                 ?>
                                 </td>
                                 <td>
-                                    <table style="margin:0px; padding:0px;">
+                                    <table class="fb-comment-table-cnt" style="margin:0px; padding:0px;">
                                     <tr>
-                                        <td>
+                                        <td class="page-fb-name-td">
                                             <span style="color:#036; font-weight:bold;"><?php echo $val1->from->name; ?></span>
                                         </td>
                                     </tr>
@@ -251,7 +251,7 @@ if($posted_by_me)
                     <div style="margin:-9px; float:left; width:103.4%; margin-top:15px; border-top:#EEE 1px solid;" id="comments_box_<?php echo $values->id; ?>">
                         <div style="width:98%; padding:10px 0px 10px 20px; border:#000 0px solid;">
                             <img src="https://graph.facebook.com/<?php echo $frst_page; ?>/picture?type=square" width="35" height="32" /> &nbsp;
-                            <input type="text" name="comment_<?php echo $values->id; ?>" id="comment_<?php echo $values->id; ?>" placeholder="Post a comment ..." onkeyup="IdentifyMe(event,'<?php echo $values->id; ?>','<?php echo $fbposts_get[0]['token']; ?>');" style="width:82%;" />
+                            <input type="text" class="fb-comment-field-style" name="comment_<?php echo $values->id; ?>" id="comment_<?php echo $values->id; ?>" placeholder="Post a comment ..." onkeyup="IdentifyMe(event,'<?php echo $values->id; ?>','<?php echo $fbposts_get[0]['token']; ?>');" style="width:82%;" />
                         </div>
                     </div>
                  

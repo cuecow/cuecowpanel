@@ -13,7 +13,7 @@
 
 <div class="clearfix"></div>
 
-<div class="span6" style="width:900px;">
+<div class="span8">
     	
 	<?php 
                             
@@ -26,7 +26,7 @@
         <div class="field-content-44">
             <div class="login_field-content-44-left"><label><?php echo getContent('user.location.groups.label1',Yii::app()->session['language']); ?>:</label></div>
             <div class="login_field-content-44-right left-content-fld">
-                <select name="group_ids[]" id="group_ids" multiple="multiple" style="font-size:14px; color:#333333; padding:10px; width:300px;">
+                <select name="group_ids[]" id="group_ids" multiple="multiple" style="font-size:14px; color:#333333; padding:10px; width:280px;">
                 <?php foreach($all_groups as $key) { ?>
                     <option value="<?php echo $key['group_id'] ?>"><?php echo $key['name'] ?></option>
                 <?php } ?>

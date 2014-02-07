@@ -8,18 +8,18 @@
 	<div class="row-fluid">
     
     <form name="categories" action="" id="filter" method="POST">
-	<table class="table table-striped">
-    <tr>
-        <td width="12%"><?php echo getContent('user.buzz.selectlang',Yii::app()->session['language']); ?>:</td>
-        <td width="20%">
+	<div class="row-fluid">
+    
+        <div class="span2"><?php echo getContent('user.buzz.selectlang',Yii::app()->session['language']); ?>:</div>
+        <div class="span2">
             <select id="lang" name="language" class="pagesize" style="width:80%;">
                 <option value="">All Languages</option>
                 <option value="en">English</option>
                 <option value="da">Danish</option>
             </select>
-        </td>
-        <td width="10%"><?php echo getContent('user.buzz.selectsource',Yii::app()->session['language']); ?>:</td>
-        <td width="37%">
+        </div>
+        <div class="span2"><?php echo getContent('user.buzz.selectsource',Yii::app()->session['language']); ?>:</div>
+        <div class="span3">
             <select id="source" name="source" class="pagesize" style="width:80%">
             <?php
             
@@ -34,42 +34,43 @@
             }
             ?>
             </select>
-        </td>
-        <td width="21%">
+        </div>
+        <div class="span3">
         	<a href="#myModalKeywords" data-toggle="modal"><button class="btn" type="button"><?php echo getContent('user.buzz.editbrand',Yii::app()->session['language']); ?></button></a>
-		</td>
-    </tr>
-    </table>
+		</div>
+        </div>
+    
 
     <div class="clear"></div>
 	<div class="clearfix"></div>
     
     <h4><?php echo getContent('user.buzz.categories',Yii::app()->session['language']); ?></h4>
-	<table class="table" width="100%">
-    <tr>
-        <td>
+	<div class="row-fluid">
+            <div class="buzz-chebox-data">
+        <div class="span1">
             <label for="cat0" class="check"><input type="checkbox" name="category" value="10" class="cat" id="cat0" <?php if($_POST['category'] || (is_array($categories) && in_array('category=10',$categories))){ echo 'checked';}?>> &nbsp; <?php echo getContent('user.buzz.any',Yii::app()->session['language']); ?></label>
-        </td>
-        <td>
+        </div>
+        <div class="span1">
             <label for="cat1" class="check"><input type="checkbox" name="category1" value="1" class="cat" id="cat1" <?php if($_POST['category1'] || (is_array($categories) && in_array('category1=1',$categories))){ echo 'checked';}?>> &nbsp; <?php echo getContent('user.buzz.brand',Yii::app()->session['language']); ?></label>
-        </td>
-        <td>
+        </div>
+        <div class="span1">
             <label for="cat2" class="check"><input type="checkbox" name="category2" value="2" class="cat" id="cat2" <?php if($_POST['category2'] || (is_array($categories) && in_array('category2=2',$categories))){ echo 'checked';}?>> &nbsp; <?php echo getContent('user.buzz.product',Yii::app()->session['language']); ?></label>
-        </td>
-        <td>
+        </div>
+        <div class="span1">
             <label for="cat3" class="check"><input type="checkbox" name="category3" value="3" class="cat" id="cat3" <?php if($_POST['category3'] || (is_array($categories) && in_array('category3=3',$categories))){ echo 'checked';}?>> &nbsp; <?php echo getContent('user.buzz.person',Yii::app()->session['language']); ?></label>
-        </td>
-        <td>
+        </div>
+        <div class="span2">
             <label for="cat4" class="check"><input type="checkbox" name="category4" value="4" class="cat" id="cat4" <?php if($_POST['category4'] || (is_array($categories) && in_array('category4=4',$categories))){ echo 'checked';}?>> &nbsp; <?php echo getContent('user.buzz.competitor',Yii::app()->session['language']); ?></label>
-        </td>
-        <td>
+        </div>
+        <div class="span2">
             <label for="cat5" class="check"><input type="checkbox" name="category5" value="5" class="cat" id="cat5" <?php if($_POST['category5'] || (is_array($categories) && in_array('category5=5',$categories))){ echo 'checked';}?>> &nbsp; <?php echo getContent('user.buzz.industryterm',Yii::app()->session['language']); ?></label>
-        </td>
-        <td align="right">
+        </div>
+        <div class="span4 buzz-setting-button" style="text-align: right;">
             <a href="#myModalAlert" data-toggle="modal" id="newalert"><button class="btn" type="button"><?php echo getContent('user.buzz.makenewalert',Yii::app()->session['language']); ?></button></a>
-        </td>
-    </tr>
-    </table>
+        </div>
+                </div>
+            </div>
+
     </form>
     
     <h4><?php echo getContent('user.buzz.searchresult',Yii::app()->session['language']); ?>:</h4>
@@ -77,7 +78,7 @@
     <tbody><tr><td id="results"><?php include('buzz/postage.php'); ?></td></tr></tbody> 
     </table>
     
-    </div>
+    
     
 </div>
 
