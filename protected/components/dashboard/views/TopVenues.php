@@ -1,4 +1,6 @@
 <?php 
+
+$user_curr = Yii::app()->user->user_id;
 //var_dump(Yii::app()->user->user_id); die();
 $top_location = Location::model()->GetTopLocation(); 
 //$reach = $model_fb->GetPagesToken();
@@ -58,7 +60,50 @@ foreach($location_sorted as $key=>$value)
 $fblikes_total = number_format($fblikes_total);
 $checkin_total = number_format($checkin_total);
 
-?>         
+?>   
+
+<script>
+    $(document).ready(function(){    
+        get_reach();
+    });
+    
+    function get_reach() {
+        //var posts = '<?= $page ?>';
+        var curr_user = '<?= $user_curr ?>';
+        //alert(posts);
+        //alert(curr_user);
+        $.ajax({
+            type : 'POST',
+            url : '<?php echo Yii::app()->request->baseUrl; ?>/ajax/getReach.php',
+            dataType : 'json',
+
+            data: 'user='+ curr_user,
+            //data: 'user='+ curr_user,
+            success : function(response){
+                //alert('result');
+                //console.log(response);
+
+                var resultdata = response['result'];
+                console.log(resultdata);
+                var pagem = resultdata;
+                $('#wait_social').hide();
+                $('#social_reach').append(pagem);
+                
+                //save_posts = resultdata;
+                //console.log(save_posts);
+                //var ids = response['pages_id'];
+                //console.log(resultdata[0].acc);
+
+                //render_posts(resultdata);			
+            },
+            error : function(response) {
+                //alert('error');
+                console.log(response);             
+            }
+        });
+    }
+    
+</script>
 
 <!--<div class="span6">
     <div class="accordion" id="accordion1">
@@ -181,7 +226,8 @@ $checkin_total = number_format($checkin_total);
                     <div class="box-cnt-main">
                     <label class="label-text">Audience</label>
                     <i class="ico-parents list-arrow"></i>
-                    <p class="arrow-count"><?php echo $social_reach ?></p>
+                    <center id="wait_social" class="buttonwait-social"> <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/ajaxd-loader.gif" /></center>
+                    <p class="arrow-count" id="social_reach"></p>
                     </div>
                 </li>
                 </ul>

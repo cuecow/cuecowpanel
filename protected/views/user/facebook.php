@@ -267,9 +267,9 @@ function show_all_comments(id)
 </div>
 <?php } ?>
 
-<div class="container_4" style="padding-top:20px; background:#FFF;">
-	<div class="grid_4" style="background:#FFF; border:none;">
-		<div class="panel" style="background:#FFF; border:none;">
+<div class="container_4 contaner-4-outter-div">
+	<div class="grid_4 grid-4-fb-div">
+		<div class="panel pannel-fb-page">
 			
 			<div class="content">
 			
@@ -280,7 +280,7 @@ function show_all_comments(id)
 						
 			?>
 					
-				<div style="border:#000000 0px solid; margin:50px 150px 50px 150px; width:870px;">
+				<div class="panel-inner-fb-add">
 				
 					<?php $form=$this->beginWidget('CActiveForm', array('id'=>'fbpage-form','enableClientValidation'=>true,'htmlOptions'=>array('class'=>'styled'),'clientOptions'=>array('validateOnSubmit'=>true,),)); ?>
 						
@@ -353,8 +353,8 @@ function show_all_comments(id)
 	<div class="tab_container">
 		<div id="tab1" class="tab_content">
 			<div class="fb_preview">
-				<div class="dummy_container">
-					<div class="fb_container" style="min-height:700px;">
+				<div class="dummy_container"> 
+					<div class="fb_container inner-container-fb-page">
 						<?php echo $spec_rec[0]['for_public']; ?>
 					</div>
 				</div>
@@ -363,7 +363,7 @@ function show_all_comments(id)
 		<div id="tab2" class="tab_content">
 			<div class="fb_preview">
 				<div class="dummy_container">
-					<div class="fb_container" style="min-height:700px;">
+					<div class="fb_container inner-container-fb-page">
 						<?php echo $spec_rec[0]['for_fan']; ?>
 					</div>
 				</div>

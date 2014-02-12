@@ -199,6 +199,22 @@ width:85%;
         padding-left: 0px;
     }
     
+    .loc-media-list div {
+        border-bottom: 1px solid #efefef !important;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        
+    }
+    
+    .location-selecbox select {
+        width: 100% !important;
+        
+    }
+    
+    .loc-media-list div:last-child {
+        border-bottom: none !important;
+    }
+    
     .cell01, .cell02, .cell03, .cell06 {
         width: 100% !important;
         
@@ -489,4 +505,276 @@ width:74%;
 
 .bg-clr-gray {
     background: #f7f7f7;
+}
+
+/*Debxox: convert inline css to classes format from here*/
+
+.contaner-4-fb-div{
+    padding-top:20px;
+    background:#FFF;
+}
+
+.grid-4-fb-div{
+    background:#FFF;
+    border:none;
+}
+
+.pannel-fb-page{
+    background:#FFF;
+    border:none;
+}
+
+.content-outter-fb-div{
+    border:#000000 0px solid;
+    margin:50px 150px 50px 150px;
+    width:870px;
+}
+
+.inner-container-fb-page{
+    min-height:700px;
+}
+
+.btn-post-page{
+    float:right;
+    margin-right:23px;
+}
+
+.add-form-post-page{
+    height:auto;
+    width:50%;
+}
+
+.post-div-fb-comments{
+    float:left;
+    width: 96%;
+}
+
+.post-div-fb-comments-inner{
+    display:block;
+    background:#FFF;
+    padding:10px;
+    border-radius:6px;
+    -moz-border-radius:6px;
+    width:95%;
+    float:left;
+}
+
+.post-detail-fb-comments{
+    width:100%;
+    border-bottom:#EEE 1px solid;
+    float:left;
+}
+
+.post-detail-inner-fb-comments{
+    padding-bottom:10px;
+    width:12%;
+    margin-left:2%;
+    float:left;
+}
+
+.post-detail-inner-fb{
+    width:76%;
+    float:left;
+}
+
+.post-detail-last-fb-comments{
+    width:10%;
+    float:left;
+}
+
+.post-message-fb-comments{
+    float:left;
+    width:100%;
+    padding-top:5px;
+}
+
+.post-all-cmnts-fb{
+    float:left;
+    width:100%;
+}
+
+.post-all-cmnts-inner-fb{
+    display:none;
+    float:left;
+}
+
+.post-comnts-inner-fb{
+    padding:5px;
+    width:450px;
+    margin-left:20px;
+}
+
+.post-all-tbl-fb{
+    margin:0px;
+    padding:0px;
+}
+
+.post-tbl-span-fb{
+    color:#036;
+    font-weight:bold;
+}
+
+.shrt-cmnt-fb-comments{
+    padding:5px;
+    width:450px;
+    margin-left:20px;
+}
+
+.shrt-tbl-fb-comments{
+    margin:0px;
+    padding:0px;
+}
+
+.shrt-tbl-inner-fb{
+    margin:0px;
+    padding:0px;
+}
+
+.shrt-inner-span-fb{
+    color:#036;
+    font-weight:bold;
+}
+
+.shrt-tbl-outter-fb-cmnt{
+    margin:-9px;
+    float:left;
+    width:103.4%;
+    margin-top:15px;
+    border-top:#EEE 1px solid;
+}
+
+.inner-div-fb-cmnt{
+    width:98%;
+    padding:10px 0px 10px 20px;
+    border:#000 0px solid;
+}
+
+.ouuter-div-fb-comments{
+    float:left;
+    width:100%;
+}
+
+.tab1-cmapign-listing{
+    border-bottom:1px solid #ccc;
+    padding: 10px 0 0 0;
+}
+
+.inner-buzz-postage{
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+.outter-select-addloc-ven{
+    font-size:14px;
+    color:#333333;
+    padding:10px;
+    width:280px;
+}
+
+.fburl-addloc-venue{
+    margin:0px 0px 20px 290px;
+    display:none;
+}
+
+.edit-div-editgrp-ven{
+    float:left;
+    padding-left:20px;
+    padding-top:50px;
+}
+
+.ingroup-fld-editgrp{
+    float:left;
+    padding-left:20px;
+}
+
+.inner-td-profile-page{
+    font-size:24px;
+    padding:20px 0px 20px 0px;
+}
+
+.outter-table-profile-pg{
+    float:right;
+    margin:10px 70px 20px 0px;
+}
+
+.panel-inner-fb-add{
+    border:#000000 0px solid;
+    margin:50px 150px 50px 150px;
+    width:870px;
+}
+
+.buttonwait-social {
+    position: absolute;
+    top: 30px;
+    right:30px;
+}
+
+.box-cnt-main {
+    position: relative;
+}
+
+.post-fb-cmnt-ajax{
+    display:block; background:#FFF;
+    padding:10px;
+    border-radius:6px ;
+    -moz-border-radius:6px;
+    width:95%;
+    float:left;
+}
+
+.post-fb-cmnt-inr-ajax{
+    padding-bottom:10px;
+    width:12%;
+    margin-left:2%;
+    float:left;
+}
+
+.post-fb-cmnt-otr-ajax{
+    width:100%;
+    border-bottom:#EEE 1px solid;
+    float:left;
+}
+
+.post-tbl-otr-ajax{
+    width:76%;
+    float:left;
+}
+
+.post-otr-tbl-ajax{
+    width:10%;
+    float:left;
+}
+
+.post-otr-span-ajax{
+    float:left;
+    width:100%;
+    padding-top:5px;
+}
+
+.other-post-span-ajax{
+    color:#036;
+    font-weight:bold;
+}
+
+.othr-pst-span-ajax{
+    color:#666;
+    padding-top:10px;
+}
+
+.othr-pst-pic-ajax{
+    float:left;
+    width:100%;
+    padding-top:10px;
+}
+
+.othr-pic-inr-ajax{
+    border:#999 0px solid;
+    padding:5px;
+}
+
+.othr-all-cmnts-ajax{
+    padding:5px;
+    width:450px;
+    margin-left:20px;
 }

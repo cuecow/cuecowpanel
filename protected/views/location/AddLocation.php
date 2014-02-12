@@ -26,7 +26,7 @@
         <div class="field-content-44">
             <div class="login_field-content-44-left"><label><?php echo getContent('user.location.groups.label1',Yii::app()->session['language']); ?>:</label></div>
             <div class="login_field-content-44-right left-content-fld">
-                <select name="group_ids[]" id="group_ids" multiple="multiple" style="font-size:14px; color:#333333; padding:10px; width:280px;">
+                <select name="group_ids[]" id="group_ids" multiple="multiple" class="outter-select-addloc-ven">
                 <?php foreach($all_groups as $key) { ?>
                     <option value="<?php echo $key['group_id'] ?>"><?php echo $key['name'] ?></option>
                 <?php } ?>
@@ -82,7 +82,7 @@
     
     <div class="clearfix"></div>
     
-    <div class="field-content-44" id="fburlinfo" style="margin:0px 0px 20px 290px; display:none;"></div>
+    <div class="field-content-44 fburl-addloc-venue" id="fburlinfo"></div>
     <div class="clearfix"></div>
     
     <div class="field-content-44">
@@ -97,7 +97,7 @@
     
     <div class="clearfix"></div>
     
-    <div class="field-content-44" id="fsurlinfo" style="margin:0px 0px 20px 290px; display:none;"></div>
+    <div class="field-content-44 fburl-addloc-venue" id="fsurlinfo"></div>
     <div class="clearfix"></div>
                   
     <div class="field-content-44">
@@ -113,7 +113,7 @@
     
     <div class="clearfix"></div>
     
-    <div class="field-content-44" id="googleurlinfo" style="margin:0px 0px 20px 290px; display:none;"></div>
+    <div class="field-content-44 fburl-addloc-venue" id="googleurlinfo"></div>
     <div class="clearfix"></div>
     
     <div class="field-content-44">

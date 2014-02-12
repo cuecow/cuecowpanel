@@ -46,7 +46,7 @@ else
                 
         	<fieldset>
                 
-            	<img src="https://graph.facebook.com/'.$_REQUEST['pageid'].'/picture?type=square" width="35" height="32" /> &nbsp; <input type="text" id="quickcomment1" placeholder="Enter new Post ..." style="width:85%;" />
+            	<img src="https://graph.facebook.com/'.$_REQUEST['pageid'].'/picture?type=square" width="35" height="32" /> &nbsp; <input type="text" class="fb-comment-field-style" id="quickcomment1" placeholder="Enter new Post ..." style="width:85%;" />
                     
                 <div class="clearfix"></div>
                     
@@ -70,15 +70,15 @@ else
 		
 					$return['msg'] .= '<div class="well well-small" style="float:left;">
 					
-					<div id="div_'.$values->id.'" style="display:block; background:#FFF; padding:10px;border-radius:6px ; -moz-border-radius:6px; width:95%; float:left;">
+					<div id="div_'.$values->id.'" class="post-fb-cmnt-ajax">
 
-    					<div style="width:100%; border-bottom:#EEE 1px solid; float:left;">
+    					<div class="post-fb-cmnt-otr-ajax">
                         
-						<div style="padding-bottom:10px; width:12%; margin-left:2%; float:left;">
+						<div class="post-fb-cmnt-inr-ajax">
 							<img src="https://graph.facebook.com/'.$_REQUEST['pageid'].'/picture?type=square" />
 						</div>
                         
-						<div style="width:76%; float:left;">
+						<div class="post-tbl-otr-ajax">
 							<table border="0" cellpadding="0" cellspacing="0" width="100%">
 							<tr>
 								<td class="facebook_pagename">'.$values->from->name.'</td>
@@ -111,12 +111,12 @@ else
             				</table>
 						</div>
                         
-						<div style="width:10%; float:left;" align="right">
+						<div class="post-otr-tbl-ajax" align="right">
 							<a href="javascript:void(0);" onclick="javascript:show_confirm(\''.$values->id.'\',\''.$fbposts_get[0]['token'].'\',\'Are you sure, you want to delete this post?\');"><img src="'.Yii::app()->request->baseUrl.'/images/close.png" border="0" /></a>
 						</div>
     				</div>
                     
-					<div style="float:left; width:100%; padding-top:5px;">
+					<div class="post-otr-span-ajax">
 						<span class="facebook_message">
 							'.$values->message.'
 						</span>
@@ -137,7 +137,7 @@ else
 	
 	}
                     
-    $return['msg'] .= '<div style="float:left; width:100%;">';
+    $return['msg'] .= '<div class="post-all-cmnts-fb">';
     
 	$lastest_comment = array(); 
 	
@@ -147,7 +147,7 @@ else
         <table style="margin-bottom:5px;" class="table">
         <tr>
             <td> 
-                <div style="padding:5px; width:450px; margin-left:20px;">
+                <div class="post-comnts-inner-fb">
                 <table style="margin-bottom:5px;">';
                 
                 if(count($values->comments->data) > 3)
@@ -170,10 +170,10 @@ else
                             
                     $return['msg'] .= '</td>
                         <td>
-                            <table style="margin:0px; padding:0px;">
+                            <table class="post-all-tbl-fb">
                             <tr>
                                 <td>
-                                    <span style="color:#036; font-weight:bold;">
+                                    <span class="post-tbl-span-fb">
                                         '.$value1->from->name.'
                                     </span>
                                 </td>
@@ -221,8 +221,8 @@ else
             </table>
             </div>
                         
-            <div id="short_comments_'.$values->id.'" style="padding:5px; width:450px; margin-left:20px;">
-                <table style="margin:0px; padding:0px;">';
+            <div id="short_comments_'.$values->id.'" class="comment-fb-box-outer shrt-cmnt-fb-comments">
+                <table class="shrt-tbl-fb-comments">';
 				    
                 if(count($lastest_comment))
                 {
@@ -237,10 +237,10 @@ else
 									
                                 $return['msg'] .= '</td>
                                 <td>
-                                    <table style="margin:0px; padding:0px;">
+                                    <table class="fb-comment-table-cnt shrt-tbl-inner-fb>
                                     <tr>
                                         <td>
-                                            <span style="color:#036; font-weight:bold;">'.$val1->from->name.'</span>
+                                            <span class="shrt-inner-span-fb">'.$val1->from->name.'</span>
                                         </td>
                                     </tr>
                                     <tr>
@@ -282,10 +282,10 @@ else
                     
                      $return['msg'] .= '</div>
                     
-                    <div style="margin:-9px; float:left; width:103.4%; margin-top:15px; border-top:#EEE 1px solid;" id="comments_box_'.$values->id.'">
-                        <div style="width:98%; padding:10px 0px 10px 20px; border:#000 0px solid;">
+                    <div class="shrt-tbl-outter-fb-cmnt" id="comments_box_'.$values->id.'">
+                        <div class="inner-div-fb-cmnt">
                             <img src="https://graph.facebook.com/'.$_REQUEST['pageid'].'/picture?type=square" width="35" height="32" /> &nbsp;
-                            <input type="text" name="comment_'.$values->id.'" id="comment_'.$values->id.'" placeholder="Post a comment ..." onkeyup="IdentifyMe(event,\''.$values->id.'\',\''.$fbposts_get[0]['token'].'\');" style="width:82%;" />
+                            <input type="text" class="fb-comment-field-style" name="comment_'.$values->id.'" id="comment_'.$values->id.'" placeholder="Post a comment ..." onkeyup="IdentifyMe(event,\''.$values->id.'\',\''.$fbposts_get[0]['token'].'\');" style="width:82%;" />
                         </div>
                     </div>
                  
@@ -306,11 +306,11 @@ else
                 
         	<fieldset>
                 
-            	<img src="https://graph.facebook.com/'.$_REQUEST['pageid'].'/picture?type=square" width="35" height="32" /> &nbsp; <input type="text" id="quickcomment2" placeholder="Enter new Post ..." style="width:85%;" />
+            	<img src="https://graph.facebook.com/'.$_REQUEST['pageid'].'/picture?type=square" width="35" height="32" /> &nbsp; <input type="text" class="fb-comment-field-style" id="quickcomment2" placeholder="Enter new Post ..." style="width:85%;" />
                     
                 <div class="clearfix"></div>
                     
-                <input type="button" value="Submit" class="btn btn-info" style="float:right; margin-right:23px;" onclick="QuickPost(2);" />
+                <input type="button" value="Submit" class="btn btn-info btn-post-page" onclick="QuickPost(2);" />
                     
 			</fieldset>
                 
@@ -348,19 +348,19 @@ else
 					$comments_feed = json_decode(@file_get_contents('https://graph.facebook.com/'.$values->id.'/comments?access_token='.$fbposts_get[0]['token'].'&limit=1000'));
 								
 					$return['msg_other'] .= '<div class="well well-small" style="float:left;">
-                                            <div id="div_'.$values->id.'" style="display:block; background:#FFF; padding:10px; margin-bottom:20px; border-radius:6px ; -moz-border-radius:6px; width:95%; float:left;">
+                                            <div id="div_'.$values->id.'" class="post-fb-cmnt-ajax">
 									<!-- post\'s details -->
 									<div style="width:100%; border-bottom:#CCC 1px solid; float:left;">
 										
-										<div style="padding-bottom:10px; width:12%; margin-left:2%; float:left;">
-											<img src="https://graph.facebook.com/'.$_REQUEST['pageid'].'/picture?type=square" />
+										<div class="post-fb-cmnt-inr-ajax">
+											<img src="https://graph.facebook.com/'.$values->from->id.'/picture?type=square" />
 										</div>
 										
-										<div style="width:76%; float:left;">
+										<div class="post-tbl-otr-ajax">
 											<table border="0" cellpadding="0" cellspacing="0" width="100%">
 											<tr>
 												<td>
-													<span style="color:#036; font-weight:bold;">'.$values->from->name.'</span>
+													<span class="other-post-span-ajax">'.$values->from->name.'</span>
 												</td>
 											</tr>
 											<tr>
@@ -378,7 +378,7 @@ else
 											}
 																						
 											
-											$return['msg_other'] .= '<span style="color:#666; padding-top:10px;">
+											$return['msg_other'] .= '<span class="othr-pst-span-ajax">
 															'.$date_t.' at '.$time_t;
 											if($values->application->name) $return['msg_other'] .= ' via '.$values->application->name; 
 											
@@ -388,21 +388,21 @@ else
 											</table>
 										</div>
 										
-										<div style="width:10%; float:left;" align="right">
+										<div class="post-otr-tbl-ajax" align="right">
 											<a href="javascript:void(0);" onclick="javascript:show_confirm(\''.$values->id.'\',\''.$fbposts_get[0]['token'].'\',\'Are you sure, you want to delete this post?\');"><img src="http://panel.cuecow.com/images/close.png" border="0" /></a>
 										</div>
 										
 									</div>
 									
 									<!-- post\'s message -->
-									<div style="float:left; width:100%; padding-top:5px;">
+									<div class="post-otr-span-ajax">
 										<span class="facebook_message">'.$values->message.'</span>
 									</div>';
 									
 									if($values->picture) 
 									{ 
-										$return['msg_other'] .= '<div style="float:left; width:100%; padding-top:10px;">
-											<div style="border:#999 0px solid; padding:5px;"><img src="'.$values->picture.'" /></div>
+										$return['msg_other'] .= '<div class="othr-pst-pic-ajax">
+											<div class="othr-pic-inr-ajax"><img src="'.$values->picture.'" /></div>
 										</div>';
 									}
 									
@@ -428,7 +428,7 @@ else
 											<table style="margin-bottom:5px;">
 											<tr>
 												<td> 
-													<div style="padding:5px; width:450px; margin-left:20px;">
+													<div class="othr-all-cmnts-ajax">
 													<table style="margin-bottom:5px;">';
 													
 													if(count($values->comments->data) > 3)
@@ -559,10 +559,10 @@ else
 					
 					$return['msg_other'] .= '</div>
 					
-					<div style="background:#EEE; margin:-9px; float:left; width:103.4%; margin-top:15px;" id="comments_box_'.$values->id.'">
-						<div style="width:98%; padding:10px 0px 10px 20px; border:#000 0px solid;">
+					<div class="shrt-tbl-outter-fb-cmnt" id="comments_box_'.$values->id.'">
+						<div class="inner-div-fb-cmnt">
 							<img src="https://graph.facebook.com/'.$_REQUEST['pageid'].'/picture?type=square" width="35" height="32" />
-							<input type="text" name="comment_'.$values->id.'" id="comment_'.$values->id.'" value="Post a comment ..." onfocus="if(this.value==\'Post a comment ...\')this.value=\'\';" onblur="if(this.value==\'\') this.value=\'Post a comment ...\';" style="width:85%; border:#CCC 1px solid; font-size:11px; padding:4px; color:#333;" onkeyup="IdentifyMe(event,\''.$values->id.'\',\''.$fbposts_get[0]['token'].'\');" />
+							<input type="text" class="fb-comment-field-style" name="comment_'.$values->id.'" id="comment_'.$values->id.'" value="Post a comment ..." onfocus="if(this.value==\'Post a comment ...\')this.value=\'\';" onblur="if(this.value==\'\') this.value=\'Post a comment ...\';" style="width:85%; border:#CCC 1px solid; font-size:11px; padding:4px; color:#333;" onkeyup="IdentifyMe(event,\''.$values->id.'\',\''.$fbposts_get[0]['token'].'\');" />
 						</div>
 					</div>
                                      </div>

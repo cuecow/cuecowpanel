@@ -306,7 +306,7 @@
       						<table width="80%" class="table table-striped">
                             <tr><td style="border-top:none;"><center><h4><?php echo $value['name']; ?></h4></center></td></tr>
                             <tr>
-                            	<td style="font-size:24px; padding:20px 0px 20px 0px;">
+                            	<td class="inner-td-profile-page">
                                 	<center>
                                     	<sup>kr</sup> <?php if($value['price'] == 0) echo 'Free'; else echo $value['price']; ?> 
                                         <span style="font-size:12px; color:#999999;">/month</span>
@@ -386,7 +386,7 @@
                 <?php } } ?>
                 </table>
                 
-                <div style="float:right; margin:10px 70px 20px 0px;">
+                <div class="outter-table-profile-pg">
                 	<input type="submit" class="btn btn-info" name="selwallbtn" value="Activate" />
                 </div>
                 

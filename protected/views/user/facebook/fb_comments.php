@@ -20,17 +20,17 @@ if($posted_by_me)
 			$comments_feed = json_decode(@file_get_contents('https://graph.facebook.com/'.$values->id.'/comments?access_token='.$fbposts_get[0]['token'].'&limit=1000'));
 			
 ?>
-<div id="div_msg<?php echo $values->id; ?>" class="well well-small fb-commentbox-cnt" style="float:left; width: 96%;">
-	<div id="div_<?php echo $values->id; ?>" style="display:block; background:#FFF; padding:10px;border-radius:6px ; -moz-border-radius:6px; width:95%; float:left;">
+<div id="div_msg<?php echo $values->id; ?>" class="well well-small fb-commentbox-cnt post-div-fb-comments">
+	<div id="div_<?php echo $values->id; ?>" class="post-div-fb-comments-inner">
     
     <!-- post's details -->
-    <div style="width:100%; border-bottom:#EEE 1px solid; float:left;">
+    <div class="post-detail-fb-comments">
                         
-        <div style="padding-bottom:10px; width:12%; margin-left:2%; float:left;">
+        <div class="post-detail-inner-fb-comments">
             <img src="https://graph.facebook.com/<?php echo $values->from->id; ?>/picture?type=square" />
         </div>
                         
-		<div style="width:76%; float:left;">
+		<div class="post-detail-inner-fb">
         	<table border="0" cellpadding="0" cellspacing="0" width="100%">
             <tr>
                 <td class="facebook_pagename"><?php echo $values->from->name; ?></td>
@@ -60,14 +60,14 @@ if($posted_by_me)
             </table>
 		</div>
                         
-        <div style="width:10%; float:left;" align="right">
+        <div class="post-detail-last-fb-comments" align="right">
             <a href="javascript:void(0);" onclick="javascript:show_confirm('<?php echo $values->id; ?>','<?php echo $fbposts_get[0]['token']; ?>','Are you sure, you want to delete this post?');"><img src="<?php echo Yii::app()->request->baseUrl; ?>/images/close.png" border="0" /></a>
         </div>       
         
     </div>
                     
     <!-- post's message -->
-    <div style="float:left; width:100%; padding-top:5px;">
+    <div class="post-message-fb-comments">
         <span class="facebook_message">
             <?php echo $values->message; ?>
         </span>
@@ -91,16 +91,16 @@ if($posted_by_me)
     </div>
     <?php } ?>
                     
-    <div style="float:left; width:100%;">
+    <div class="post-all-cmnts-fb">
     
         <?php  $lastest_comment = array(); if(count($values->comments->data) > 0 && count($comments_feed)) { ?>
         
         <!-- All Comment div -->                  
-        <div id="comments_<?php echo $values->id; ?>" style="display:none; float:left;">
+        <div id="comments_<?php echo $values->id; ?>" class="post-all-cmnts-inner-fb">
         <table class="table-content-brd" style="margin-bottom:5px;" class="table">
         <tr>
             <td> 
-                <div style="padding:5px; width:450px; margin-left:20px;">
+                <div class="post-comnts-inner-fb">
                 <table style="margin-bottom:5px;">
 				<?php
                 
@@ -125,10 +125,10 @@ if($posted_by_me)
                             ?>
                         </td>
                         <td>
-                            <table  style="margin:0px; padding:0px;">
+                            <table  class="post-all-tbl-fb">
                             <tr>
                                 <td>
-                                    <span style="color:#036; font-weight:bold;">
+                                    <span class="post-tbl-span-fb">
                                         <?php echo $value1->from->name; ?>
                                     </span>
                                 </td>
@@ -182,8 +182,8 @@ if($posted_by_me)
             </div>
                         
             <!-- Short Comment div -->
-            <div id="short_comments_<?php echo $values->id; ?>" class="comment-fb-box-outer" style="padding:5px; width:450px; margin-left:20px;">
-                <table style="margin:0px; padding:0px;">
+            <div id="short_comments_<?php echo $values->id; ?>" class="comment-fb-box-outer shrt-cmnt-fb-comments">
+                <table class="shrt-tbl-fb-comments">
 				<?php
                     
                     if(count($lastest_comment))
@@ -199,10 +199,10 @@ if($posted_by_me)
                                 ?>
                                 </td>
                                 <td>
-                                    <table class="fb-comment-table-cnt" style="margin:0px; padding:0px;">
+                                    <table class="fb-comment-table-cnt shrt-tbl-inner-fb">
                                     <tr>
                                         <td class="page-fb-name-td">
-                                            <span style="color:#036; font-weight:bold;"><?php echo $val1->from->name; ?></span>
+                                            <span class="shrt-inner-span-fb"><?php echo $val1->from->name; ?></span>
                                         </td>
                                     </tr>
                                     <tr>
@@ -248,8 +248,8 @@ if($posted_by_me)
                     
                     </div>
                     
-                    <div style="margin:-9px; float:left; width:103.4%; margin-top:15px; border-top:#EEE 1px solid;" id="comments_box_<?php echo $values->id; ?>">
-                        <div style="width:98%; padding:10px 0px 10px 20px; border:#000 0px solid;">
+                    <div class="shrt-tbl-outter-fb-cmnt" id="comments_box_<?php echo $values->id; ?>">
+                        <div class="inner-div-fb-cmnt">
                             <img src="https://graph.facebook.com/<?php echo $frst_page; ?>/picture?type=square" width="35" height="32" /> &nbsp;
                             <input type="text" class="fb-comment-field-style" name="comment_<?php echo $values->id; ?>" id="comment_<?php echo $values->id; ?>" placeholder="Post a comment ..." onkeyup="IdentifyMe(event,'<?php echo $values->id; ?>','<?php echo $fbposts_get[0]['token']; ?>');" style="width:82%;" />
                         </div>
@@ -261,7 +261,7 @@ if($posted_by_me)
 		}
 	}
 ?>
-	<div style="float:left; width:100%;" id="more_data"></div>
+	<div class="ouuter-div-fb-comments" id="more_data"></div>
     <?php
     if($value->next)
     {

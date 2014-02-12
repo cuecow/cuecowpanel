@@ -35,7 +35,7 @@ $PastCampaign 	= $model->GetArchivedCampaigns();
     <?php if (count($ActiveCampaign)) { ?>
                     
     <div class="table table-striped checkdiv table-cmpn-one"> 
-	<div class="row-fluid" style="border-bottom:1px solid #ccc; padding: 10px 0;"> 
+	<div class="row-fluid tab1-cmapign-listing"> 
 		<div class="span1 cell01">
         	<strong><?php echo getContent('user.campaign.sn',Yii::app()->session['language']); ?></strong>
         </div>
@@ -177,7 +177,7 @@ $PastCampaign 	= $model->GetArchivedCampaigns();
 		<?php if (count($FutureCampaign)) { ?>
                     
 		<div class="table table-striped checkdiv">
-                    <div class="row-fluid" style="border-bottom:1px solid #ccc; padding: 10px 0;">
+                    <div class="row-fluid tab1-cmapign-listing">
             <div class="span1 cell01"><strong><?php echo getContent('user.campaign.sn',Yii::app()->session['language']); ?></strong></div>
             <div class="span2 cell02"><strong><?php echo getContent('user.campaign.location',Yii::app()->session['language']); ?></strong></div> 
             <div class="span2 cell03"><strong><?php echo getContent('user.campaign.sdateenddate',Yii::app()->session['language']); ?></strong></div>
@@ -237,10 +237,10 @@ $PastCampaign 	= $model->GetArchivedCampaigns();
             
                 if($flag%2 == 0){ ?>
             
-                    <div class="row-fluid bg-clr-gray" style="border-bottom:1px solid #ccc; padding: 10px 0;">
+                    <div class="row-fluid bg-clr-gray tab1-cmapign-listing">
               <?php  }
               else{ ?>
-                  <div class="row-fluid" style="border-bottom:1px solid #ccc; padding: 10px 0;">
+                  <div class="row-fluid tab1-cmapign-listing">
               <?php }
 ?>
 
@@ -284,7 +284,7 @@ $PastCampaign 	= $model->GetArchivedCampaigns();
 		<?php if (count($PastCampaign)) { ?>
         
         <div class="table table-striped checkdiv">
-            <div class="row-fluid" style="border-bottom:1px solid #ccc; padding: 10px 0;">
+            <div class="row-fluid tab1-cmapign-listing">
             <div class="span1 cell01"><strong><?php echo getContent('user.campaign.sn',Yii::app()->session['language']); ?></strong></div>
             <div class="span2 cell02"><strong><?php echo getContent('user.campaign.location',Yii::app()->session['language']); ?></strong></div> 
             <div class="span2 cell03"><strong><?php echo getContent('user.campaign.sdateenddate',Yii::app()->session['language']); ?></strong></div> 
@@ -353,10 +353,10 @@ $PastCampaign 	= $model->GetArchivedCampaigns();
             
                 if($flag%2 == 0){ ?>
             
-                    <div class="row-fluid bg-clr-gray" style="border-bottom:1px solid #ccc; padding: 10px 0;">
+                    <div class="row-fluid bg-clr-gray tab1-cmapign-listing">
               <?php  }
               else{ ?>
-                  <div class="row-fluid" style="border-bottom:1px solid #ccc; padding: 10px 0;">
+                  <div class="row-fluid tab1-cmapign-listing">
               <?php }
 ?>
             

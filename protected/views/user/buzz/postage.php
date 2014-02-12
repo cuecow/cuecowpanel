@@ -131,11 +131,11 @@
             $termstring = $gd[1].$gd[2];
            if($flag%2 == 0)
            { ?>
-               <div class="row-fluid bg-clr-gray" style="border-bottom: 1px solid #ccc; padding-bottom: 10px; padding-top: 10px;">
+               <div class="row-fluid bg-clr-gray inner-buzz-postage">
            <?php } else {
         ?>
         
-        <div class="row-fluid" style="border-bottom: 1px solid #ccc; padding-bottom: 10px; padding-top: 10px;">
+        <div class="row-fluid inner-buzz-postage">
             <?php } ?>
         <div id="content_<?php echo $i; ?>">
             <div class="span1 border-bottom table-spacing"><a href="<?php echo $gd[1]; ?>"><img src="<?php echo $gd[3]; ?>" alt="<?php echo $gd[0]; ?>" style="width: 80px; height: 80px;" /></a></div>

@@ -15,11 +15,10 @@ if(count($all_locations))
 
 ?>
 
-<table class="table table-striped"> 
-<tbody> 
-<tr> 
-    <td align="left" style="border:none;">
-        <select class="pagesize" name="location" style="width:500px;" onchange="window.location.href='<?php echo Yii::app()->request->baseUrl; ?>/index.php/location/location/loc_id/'+this.value+'/dataof/<?php echo $_REQUEST['dataof']; ?>'">
+<div class="location-selecbox"> 
+
+    <div>
+        <select class="pagesize" name="location" style="width:400px; margin-bottom: 20px;" onchange="window.location.href='<?php echo Yii::app()->request->baseUrl; ?>/index.php/location/location/loc_id/'+this.value+'/dataof/<?php echo $_REQUEST['dataof']; ?>'">
         <?php
         
         foreach($all_locations as $key=>$values)
@@ -37,9 +36,9 @@ if(count($all_locations))
             <option value="0" <?php if($_REQUEST['loc_id']==0 || empty($_REQUEST['loc_id'])) echo 'selected'; ?>>All Venues</option>
         
         </select>
-    </td> 
+    </div> 
     
-    <td width="25%" align="left" style="border:none;">
+    <div style="border:none;">
 		<!--<?php echo getContent('user.location.list.daterange',Yii::app()->session['language']); ?> &nbsp;&nbsp;&nbsp;
         <select class="pagesize" name="date_range" style="width:160px;" onchange="window.location.href='<?php echo Yii::app()->request->baseUrl; ?>/index.php/location/location/loc_id/<?php echo $_REQUEST['loc_id']; ?>/dataof/'+this.value">
             <option selected="selected" value="">All Times</option>
@@ -52,10 +51,9 @@ if(count($all_locations))
             <option value="1095" <?php if($_REQUEST['dataof']==1095) echo 'selected'; ?>>Last 3 Years</option>
             <option value="2190" <?php if($_REQUEST['dataof']==2190) echo 'selected'; ?>>Last 6 Years</option>
         </select>-->
-    </td> 
-</tr>
-</tbody> 
-</table>
+    </div> 
+ 
+</div>
 	
 <div class="clear"></div>
 <div class="clearfix"></div>
@@ -97,40 +95,39 @@ foreach($allurl as $fbs)
 arsort($temp_array);
 					
 ?>
+<div class="row-fluid loc-media-list">
 
-<table class="table table-striped"> 
-<thead> 
-<tr> 
-	<th style="width:50px;">
+	<div class="span1">
     	<strong><?php echo getContent('user.location.list.column1',Yii::app()->session['language']); ?></strong>
-	</th> 
-    <th width="250px;">
+	</div> 
+    <div class="span3">
     	<strong><?php echo getContent('user.location.list.column2',Yii::app()->session['language']); ?></strong>
-	</th> 
-    <th>
+	</div> 
+    <div class="span1">
     	<strong><?php echo getContent('user.location.list.column3',Yii::app()->session['language']); ?></strong>
-	</th> 
-    <th>
+	</div> 
+    <div class="span1">
     	<strong><?php echo getContent('user.location.list.column4',Yii::app()->session['language']); ?></strong>
-	</th> 
-    <th>
+	</div> 
+    <div class="span1">
     	<strong><?php echo getContent('user.location.list.column5',Yii::app()->session['language']); ?></strong>
-	</th> 
-    <th>
+	</div> 
+    <div class="span2">
     	<strong><?php echo getContent('user.location.list.column6',Yii::app()->session['language']); ?></strong>
-	</th> 
-    <th>
+	</div> 
+    <div class="span2">
     	<strong><?php echo getContent('user.location.list.column7',Yii::app()->session['language']); ?></strong>
-	</th>
-    <th>
+	</div>
+    <div class="span1">
     	<strong><?php echo getContent('user.location.list.column8',Yii::app()->session['language']); ?></strong>
-	</th>  
-</tr> 
-</thead> 
-<tbody> 
-                    
+	</div>  
+
+</div>
+
+                  
 <?php 
 
+$flag=0;
 
 foreach($temp_array as $key=>$value)
 {	
@@ -151,18 +148,24 @@ foreach($temp_array as $key=>$value)
 	else
 		$gdata = array();
 
-?>
-<tr> 
-	<td><?php echo $g; ?></td> 
-    <td>
+
+    if($flag%2 == 0)
+    { ?>
+        <div class="row-fluid bg-clr-gray tab1-cmapign-listing loc-media-list">
+<?php } else {
+        ?>   
+        <div class="row-fluid tab1-cmapign-listing loc-media-list">
+            <?php } ?>  
+	<div class="span1"><?php echo $g; ?></div> 
+    <div class="span3">
     	<a href="<?php echo Yii::app()->request->baseUrl; ?>/index.php/location/onelocation/id/<?=$fbs[0]['loc_id'];?>/val/1m"><?php echo ucfirst($fbs[0]['name']);?></a>
-	</td> 
-    <td><?php echo $value;?></td> 
-    <td>
+	</div> 
+    <div class="span1"><?php echo $value;?></div> 
+    <div class="span1">
 		<?php if($fbdata[0]['likes']>0) echo $fbdata[0]['likes']; else echo 0;?>
-	</td> 
-    <td><?php if(!empty($fbs[0]['googleurl'])) echo $gdata[0]['glikes']; else echo 'N/A'; ?></td> 
-    <td>
+	</div> 
+    <div class="span1"><?php if(!empty($fbs[0]['googleurl'])) echo $gdata[0]['glikes']; else echo 'N/A'; ?></div> 
+    <div class="span2">
     
 	<?php
                         
@@ -174,10 +177,10 @@ foreach($temp_array as $key=>$value)
     	<img src="<?php echo Yii::app()->request->baseUrl; ?>/images/<?php echo $fbicon; ?>" />&nbsp;&nbsp;
         <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/<?php echo $gicon; ?>" />&nbsp;&nbsp;
         <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/<?php echo $fsicon; ?>" />
-                            
-	</td> 
+        <span class="clearfix"></span>             
+	</div> 
                         
-    <td>
+    <div class="span2">
     
 	<?php
                         
@@ -204,29 +207,30 @@ foreach($temp_array as $key=>$value)
     	<img src="<?php echo Yii::app()->request->baseUrl; ?>/images/<?php echo $camp_fb; ?>" />&nbsp;&nbsp;
         <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/<?php echo $camp_google; ?>" />&nbsp;&nbsp;
         <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/<?php echo $camp_fscamp; ?>" />
-                            
-	</td>
+                <span class="clearfix"></span>            
+	</div>
                         
-    <td>
+    <div class="span1">
                             
     	<a class="icon-button edit" href="<?php echo Yii::app()->request->baseUrl; ?>/index.php/location/editlocation/id/<?=$fbs[0]['loc_id'];?>" title="Edit Page"><i class="icon-edit"></i></a>
         
         <a class="icon-button delete" href="javascript:confirmSubmit('<?php echo Yii::app()->request->baseUrl; ?>/index.php/location/deletelocation/id/<?php echo $fbs[0]['loc_id']; ?>');" title="Delete Page"><i class="icon-trash"></i></a>
                         
-	</td>
+	</div>
+        
+        </div>  
                             
-</tr>
+
                     
 <?php 
                     
-	$g++;					
+	$g++;       
+        $flag++;    
 } 
 
 ?>
-                    
-</tbody> 
-</table>
-                    
+           
+      
 <?php if(count($allurl)>40) { ?>	
                                                     
 <div id="table-pager-1" class="pager" style="padding-bottom:150px;">

@@ -47,14 +47,14 @@
         </select>
 	</div>
     
-	<div style="float:left; padding-left:20px; padding-top:50px;" class="low btn-cnt-one">
+	<div class="edit-div-editgrp-ven low btn-cnt-one">
         <div class="btn-info-venue">
             <input name="left2right" value="add" type="button" class="btn btn-info"> <br /> <br />
             <input name="right2left" value="remove" type="button" class="btn btn-info">  
         </div>
     </div>
                               
-    <div class="ingroup-cnt-field" style="float:left; padding-left:20px;">
+    <div class="ingroup-cnt-field ingroup-fld-editgrp">
         <b><?php echo getContent('user.location.addgroup.label3',Yii::app()->session['language']); ?></b><br />
         <select class="chooseitem-box" name="itemsToAdd[]" id="right" multiple="multiple" style="padding:10px; outline:none; width:300px; height:200px;">
         </select>
@@ -87,14 +87,14 @@
         </select>
     </div>
                               
-    <div style="float:left; padding-left:20px; padding-top:50px;" class="low">
+    <div class="low edit-div-editgrp-ven">
         <center>
             <input name="left2right" value="add" type="button" class="btn btn-info"> <br /> <br />
             <input name="right2left" value="remove" type="button" class="btn btn-info">  
         </center>
     </div>
     
-    <div style="float:left; padding-left:20px;">
+    <div class="ingroup-fld-editgrp">
         <b><?php echo getContent('user.location.addgroup.label3',Yii::app()->session['language']); ?></b><br />
         <select name="itemsToAdd[]" id="right" multiple="multiple" style="padding:10px; outline:none; width:300px; height:200px;">
         <?php if(count($loc_array)) { ?>    

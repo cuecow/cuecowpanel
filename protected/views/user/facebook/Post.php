@@ -138,7 +138,7 @@ if($frst_page)
                     
                     <div class="clearfix"></div>
                     
-                	<input type="button" value="Submit" class="btn btn-info" style="float:right; margin-right:23px;" onclick="QuickPost(1);" />
+                	<input type="button" value="Submit" class="btn btn-info btn-post-page" onclick="QuickPost(1);" />
                     
               	</fieldset>
                 
@@ -169,7 +169,7 @@ if($frst_page)
                         
                         <div class="clearfix"></div>
                         
-                        <input type="button" value="Submit" class="btn btn-info" style="float:right; margin-right:23px;" onclick="QuickPost(2);" />
+                        <input type="button" value="Submit" class="btn btn-info btn-post-page" onclick="QuickPost(2);" />
                         
                     </fieldset>
                 
@@ -206,7 +206,7 @@ if($frst_page)
     </div>
             
 
-<div id="add_post_form" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="height:auto; width:50%;">
+<div id="add_post_form add-form-post-page" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-header">
   		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
     	<h3 id="myModalLabel">Terms of use</h3>
